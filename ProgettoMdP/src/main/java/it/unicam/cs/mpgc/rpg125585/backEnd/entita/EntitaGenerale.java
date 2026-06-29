@@ -4,16 +4,28 @@ public abstract class EntitaGenerale {
 
     private int puntiVita;
     private int puntiAttacco;
-    private int puntiDifesa;
     private int puntiScudo;
     private int distanzaAttacco;
 
-    public EntitaGenerale(int puntiVita, int puntiAttacco, int puntiDifesa, int puntiScudo, int distanzaAttacco) {
+    public EntitaGenerale(int puntiVita, int puntiAttacco, int puntiScudo, int distanzaAttacco) {
         this.puntiVita = puntiVita;
         this.puntiAttacco = puntiAttacco;
-        this.puntiDifesa = puntiDifesa;
         this.puntiScudo = puntiScudo;
         this.distanzaAttacco = distanzaAttacco;
+    }
+
+    public void dannoRicevuto(int danno) {
+        int dannoRealeRicevuto = danno - this.puntiScudo;
+        if(dannoRealeRicevuto < 0) dannoRealeRicevuto = 0;
+        this.puntiVita -= dannoRealeRicevuto;
+    }
+
+    public boolean attacco(EntitaGenerale bersaglio, int distanzaAttuale) {
+        if(distanzaAttuale <= this.getDistanzaAttacco() ) {
+            bersaglio.dannoRicevuto(this.getPuntiAttacco());
+            return true;
+        }
+        return false;
     }
 
     public int getPuntiVita() {
@@ -30,14 +42,6 @@ public abstract class EntitaGenerale {
 
     public void setPuntiAttacco(int puntiAttacco) {
         this.puntiAttacco = puntiAttacco;
-    }
-
-    public int getPuntiDifesa() {
-        return puntiDifesa;
-    }
-
-    public void setPuntiDifesa(int puntiDifesa) {
-        this.puntiDifesa = puntiDifesa;
     }
 
     public int getPuntiScudo() {

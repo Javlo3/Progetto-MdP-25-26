@@ -4,9 +4,7 @@ import it.unicam.cs.mpgc.rpg125585.backEnd.entita.nemici.Nemico;
 
 public class GoblinLanciere extends Nemico {
 
-    public GoblinLanciere(int puntiVita, int  puntiAttacco, int puntiDifesa, int puntiScudo) {
-        super(puntiVita, puntiAttacco, puntiDifesa, puntiScudo, 10);
+    public GoblinLanciere() {
+        super(60, 15, 3, 2);
     }
-
-    public void attacco() {}
 }
