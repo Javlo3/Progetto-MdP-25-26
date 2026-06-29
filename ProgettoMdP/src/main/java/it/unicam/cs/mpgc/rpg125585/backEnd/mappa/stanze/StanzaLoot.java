@@ -1,9 +1,8 @@
 package it.unicam.cs.mpgc.rpg125585.backEnd.mappa.stanze;
 
-public class StanzeLoot extends StanzaGenerica {
-    
+public class StanzaLoot extends StanzaGenerica {
 
-    public StanzeLoot(String nome, String descrizione) {
+    public StanzaLoot(String nome, String descrizione) {
         super(nome, descrizione);
     }
 }
