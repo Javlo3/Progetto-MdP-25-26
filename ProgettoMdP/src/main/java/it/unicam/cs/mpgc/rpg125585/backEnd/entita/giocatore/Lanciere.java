@@ -6,4 +6,8 @@ public class Lanciere extends Giocatore{
     public Lanciere(){
         super(60, 15, 3, 2);
     }
+    public Lanciere(int puntiVitaSalvataggio, int puntiAttaccoSalvataggio, int puntiScudoSalvataggio,
+                    int distanzaAttaccoSalvataggio) {
+        super(puntiVitaSalvataggio, puntiAttaccoSalvataggio, puntiScudoSalvataggio, distanzaAttaccoSalvataggio);
+    }
 }
