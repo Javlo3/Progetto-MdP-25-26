@@ -1,4 +1,4 @@
-package org.progetto.backEnd.giocatore;
+package it.unicam.cs.mpgc.rpg125585.backEnd.entita.giocatore;
 
 public enum ClasseDiAppartenenza {
     ARCIERE,

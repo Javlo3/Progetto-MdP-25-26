@@ -1,4 +1,4 @@
-package org.progetto.GUI;
+package it.unicam.cs.mpgc.rpg125585.GUI;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
