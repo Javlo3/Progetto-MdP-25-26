@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg125585.backEnd.entita;
 
 public abstract class EntitaGenerale {
+
     private int puntiVita;
     private int puntiAttacco;
     private int puntiDifesa;
