@@ -2,13 +2,15 @@ package it.unicam.cs.mpgc.rpg125585.backEnd.entita;
 
 public abstract class EntitaGenerale {
 
+    private int vitaMassima;
     private int puntiVita;
     private int puntiAttacco;
     private int puntiScudo;
     private int distanzaAttacco;
 
-    public EntitaGenerale(int puntiVita, int puntiAttacco, int puntiScudo, int distanzaAttacco) {
-        this.puntiVita = puntiVita;
+    public EntitaGenerale(int vitaMassima, int puntiAttacco, int puntiScudo, int distanzaAttacco) {
+        this.vitaMassima = vitaMassima;
+        this.puntiVita = vitaMassima;
         this.puntiAttacco = puntiAttacco;
         this.puntiScudo = puntiScudo;
         this.distanzaAttacco = distanzaAttacco;
@@ -26,6 +28,14 @@ public abstract class EntitaGenerale {
             return true;
         }
         return false;
+    }
+
+    public int getVitaMassima() {
+        return vitaMassima;
+    }
+
+    public void setVitaMassima(int vitaMassima) {
+        this.vitaMassima = vitaMassima;
     }
 
     public int getPuntiVita() {
