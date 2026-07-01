@@ -9,8 +9,8 @@ public class StanzaCombattimento extends StanzaGenerica {
 
     private final List<Nemico> nemiciStanza;
 
-    public StanzaCombattimento(String nome, String descrizione, List<Nemico> nemiciStanza) {
-        super(nome, descrizione);
+    public StanzaCombattimento(String nome, String descrizioneStanza, List<Nemico> nemiciStanza) {
+        super(nome, descrizioneStanza);
         this.nemiciStanza = nemiciStanza;
     }
 

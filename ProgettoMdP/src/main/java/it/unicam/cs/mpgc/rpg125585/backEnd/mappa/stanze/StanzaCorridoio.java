@@ -1,8 +1,8 @@
 package it.unicam.cs.mpgc.rpg125585.backEnd.mappa.stanze;
 
-public class Corridoio extends StanzaGenerica {
+public class StanzaCorridoio extends StanzaGenerica {
 
-    public Corridoio(String nome, String descrizione) {
-        super(nome, descrizione);
+    public StanzaCorridoio(String nome, String descrizioneStanza) {
+        super(nome, descrizioneStanza);
     }
 }
