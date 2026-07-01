@@ -23,6 +23,8 @@ dependencies {
     implementation("org.openjfx:javafx-graphics:$javafxVersion:$platform")
     implementation("org.openjfx:javafx-base:$javafxVersion:$platform")
 
+    implementation("com.google.code.gson:gson:2.11.0")
+
     // JUnit per i test
     testImplementation(platform("org.junit:junit-bom:6.0.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
