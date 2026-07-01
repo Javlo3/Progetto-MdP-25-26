@@ -4,10 +4,10 @@ import it.unicam.cs.mpgc.rpg125585.backEnd.entita.giocatore.Giocatore;
 
 public class Arma extends Artefatto{
 
-    private int dannoArma;
+    private final int dannoArma;
 
-    public Arma(String nome, String descrizione, int dannoArma) {
-        super(nome, descrizione);
+    public Arma(String nome, String descrizioneArtefatto, int dannoArma) {
+        super(nome, descrizioneArtefatto);
         this.dannoArma = dannoArma;
     }
 
@@ -15,8 +15,8 @@ public class Arma extends Artefatto{
         return dannoArma;
     }
 
-    public void setDannoGiocatore(Giocatore bersaglio){
-        int danniPostEquipaggiamento = bersaglio.getPuntiAttacco() + dannoArma;
-        bersaglio.setPuntiAttacco(danniPostEquipaggiamento);
+    public void equipaggiaA(Giocatore giocatore) {
+        int danniPostEquipaggiamento = giocatore.getPuntiAttacco() + dannoArma;
+        giocatore.setPuntiAttacco(danniPostEquipaggiamento);
     }
 }

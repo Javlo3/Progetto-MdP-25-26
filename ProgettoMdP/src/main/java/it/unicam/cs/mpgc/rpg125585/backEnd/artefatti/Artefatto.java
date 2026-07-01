@@ -1,12 +1,19 @@
 package it.unicam.cs.mpgc.rpg125585.backEnd.artefatti;
 
 public abstract class Artefatto {
-    private String nome;
-    private String descrizione;
+    private final String nome;
+    private final String descrizioneArtefatto;
 
-    public Artefatto(String nome, String descrizione) {
+    public Artefatto(String nome, String descrizioneArtefatto) {
         this.nome = nome;
-        this.descrizione = descrizione;
+        this.descrizioneArtefatto = descrizioneArtefatto;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescrizioneArtefatto() {
+        return descrizioneArtefatto;
+    }
 }

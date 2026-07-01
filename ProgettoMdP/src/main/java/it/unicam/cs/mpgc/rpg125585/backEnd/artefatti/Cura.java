@@ -5,8 +5,8 @@ import it.unicam.cs.mpgc.rpg125585.backEnd.entita.giocatore.Giocatore;
 public class Cura extends Artefatto{
     private int cura;
 
-    public Cura(String nome, String descrizione, int cura){
-        super(nome, descrizione);
+    public Cura(String nome, String descrizioneArtefatto, int cura){
+        super(nome, descrizioneArtefatto);
         this.cura = cura;
     }
 
