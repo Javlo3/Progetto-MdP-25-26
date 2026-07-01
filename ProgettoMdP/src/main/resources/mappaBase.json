@@ -1,0 +1,44 @@
+[
+  {
+    "idStanza" : 0,
+    "tipo" : "StanzaCorridoio",
+    "nomeStanza" : "Atrio del Castello",
+    "descrizioneStanza" : "Entrata del castello illuminata solo da delle torce" ,
+    "idNord" : 1, "idSud" : -1, "idEst" : -1, "idOvest" : -1
+  },
+  {
+    "idStanza" : 1,
+    "tipo" : "StanzaCombattimento",
+    "nomeStanza" : "",
+    "descrizioneStanza" : "" ,
+    "idNord" : 3, "idSud" : 0, "idEst" : 4, "idOvest" : 2
+  },
+  {
+    "idStanza" : 2,
+    "tipo" : "StanzaCombattimento",
+    "nomeStanza" : "",
+    "descrizioneStanza" : "" ,
+    "idNord" : -1, "idSud" : -1, "idEst" : 1, "idOvest" : -1
+  },
+  {
+    "idStanza" : 3,
+    "tipo" : "StanzaLoot",
+    "nomeStanza" : "",
+    "descrizioneStanza" : "" ,
+    "idNord" : 5, "idSud" : 1, "idEst" : -1, "idOvest" : -1
+  },
+  {
+    "idStanza" : 4,
+    "tipo" : "StanzaCombattimento",
+    "nomeStanza" : "",
+    "descrizioneStanza" : "" ,
+    "idNord" : -1, "idSud" : -1, "idEst" : -1, "idOvest" : 1
+  },
+  {
+    "idStanza" : 5,
+    "tipo" : "StanzaCombattimento",
+    "nomeStanza" : "",
+    "descrizioneStanza" : "" ,
+    "idNord" : -1, "idSud" : 3, "idEst" : -1, "idOvest" : -1
+  }
+]
