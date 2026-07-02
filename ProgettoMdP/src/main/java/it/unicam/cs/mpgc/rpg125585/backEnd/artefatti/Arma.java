@@ -6,8 +6,8 @@ public class Arma extends Artefatto{
 
     private final int dannoArma;
 
-    public Arma(String nome, String descrizioneArtefatto, int dannoArma) {
-        super(nome, descrizioneArtefatto);
+    public Arma(String nomeArtefatto, String descrizioneArtefatto, int dannoArma) {
+        super(nomeArtefatto, descrizioneArtefatto);
         this.dannoArma = dannoArma;
     }
 

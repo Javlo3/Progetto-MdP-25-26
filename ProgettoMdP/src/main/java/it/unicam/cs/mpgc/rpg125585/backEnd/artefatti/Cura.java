@@ -3,20 +3,20 @@ package it.unicam.cs.mpgc.rpg125585.backEnd.artefatti;
 import it.unicam.cs.mpgc.rpg125585.backEnd.entita.giocatore.Giocatore;
 
 public class Cura extends Artefatto{
-    private int cura;
+    private final int puntiCura;
 
-    public Cura(String nome, String descrizioneArtefatto, int cura){
-        super(nome, descrizioneArtefatto);
-        this.cura = cura;
+    public Cura(String nomeArtefatto, String descrizioneArtefatto, int puntiCura){
+        super(nomeArtefatto, descrizioneArtefatto);
+        this.puntiCura = puntiCura;
     }
 
-    public int getCura(){
-        return cura;
+    public int getPuntiCura(){
+        return puntiCura;
     }
 
     public boolean usaCura(Giocatore bersaglio){
         if(bersaglio.getPuntiVita() < bersaglio.getVitaMassima()) {
-            int vitaPostCura = bersaglio.getPuntiVita() + cura;
+            int vitaPostCura = bersaglio.getPuntiVita() + puntiCura;
             if(vitaPostCura > bersaglio.getVitaMassima()) {
                 vitaPostCura = bersaglio.getVitaMassima();
             }
