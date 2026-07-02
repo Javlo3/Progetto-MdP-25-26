@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg125585.backEnd.mappa.stanze;
 
 public abstract class StanzaGenerica {
-    private final String nome;
+    private final String nomeStanza;
     private final String descrizioneStanza;
     private StanzaGenerica stanzaNord;
     private StanzaGenerica stanzaSud;
@@ -9,12 +9,12 @@ public abstract class StanzaGenerica {
     private StanzaGenerica stanzaOvest;
 
     public StanzaGenerica(String nome, String descrizioneStanza) {
-        this.nome = nome;
+        this.nomeStanza = nome;
         this.descrizioneStanza = descrizioneStanza;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeStanza() {
+        return nomeStanza;
     }
 
     public String getDescrizioneStanza() {

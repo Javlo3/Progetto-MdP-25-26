@@ -5,8 +5,8 @@ import it.unicam.cs.mpgc.rpg125585.backEnd.artefatti.Artefatto;
 public class StanzaLoot extends StanzaGenerica {
     private Artefatto artefatto;
 
-    public StanzaLoot(String nome, String descrizioneStanza, Artefatto artefatto) {
-        super(nome, descrizioneStanza);
+    public StanzaLoot(String nomeStanza, String descrizioneStanza, Artefatto artefatto) {
+        super(nomeStanza, descrizioneStanza);
         this.artefatto = artefatto;
     }
 
