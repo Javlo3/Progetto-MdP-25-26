@@ -15,7 +15,7 @@
     "nemiciContenuti" : [
       {
         "tipoNemico" : "GoblinSemplice",
-        "nome" : "Grith",
+        "nomeNemico" : "Grith",
         "puntiVita" : 60,
         "puntiAttacco" : 10,
         "puntiScudo" : 3,
@@ -23,7 +23,7 @@
       },
       {
         "tipoNemico" : "GoblinSemplice",
-        "nome" : "Garth",
+        "nomeNemico" : "Garth",
         "puntiVita" : 60,
         "puntiAttacco" : 10,
         "puntiScudo" : 3,
@@ -34,13 +34,13 @@
   {
     "idStanza" : 2,
     "tipo" : "StanzaCombattimento",
-    "nomeStanza" : "",
-    "descrizioneStanza" : "",
+    "nomeStanza" : "Caserma Sgretolata",
+    "descrizioneStanza" : "Rottami di ferro e barili sfondati ingombrano il pavimento. Tra l'odore di muffa spicca quello delle torce di grasso usate dai goblin",
     "idNord" : -1, "idSud" : -1, "idEst" : 1, "idOvest" : -1,
     "nemiciContenuti" : [
       {
         "tipoNemico" : "GoblinSemplice",
-        "nomeNemico" : "",
+        "nomeNemico" : "Zuldik",
         "puntiVita" : 60,
         "puntiAttacco" : 10,
         "puntiScudo" : 3,
@@ -48,7 +48,7 @@
       },
       {
         "tipoNemico" : "GoblinLanciere",
-        "nomeNemico" : "",
+        "nomeNemico" : "Beardung",
         "puntiVita" : 60,
         "puntiAttacco" : 15,
         "puntiScudo" : 3,
@@ -60,60 +60,63 @@
     "idStanza" : 3,
     "tipo" : "StanzaLoot",
     "nomeStanza" : "Stanza di Cura",
-    "descrizioneStanza" : "",
+    "descrizioneStanza" : "Una stanza insolitamente silenziosa. Al centro, una piccola fontana di pietra incastonata nel muro fa sgorgare acqua limpida, un'oasi di relativa quiete rispetto all'orrore del castello",
     "idNord" : 5, "idSud" : 1, "idEst" : -1, "idOvest" : -1,
     "Artefatto" : {
       "tipoArtefatto" : "Cura",
-      "nomeArtefatto" : "",
+      "nomeArtefatto" : "Crisalide d'Aria",
       "descrizioneArtefatto" : "",
-      "puntiCura" :
+      "puntiCura" : 20
     }
   },
   {
     "idStanza" : 4,
     "tipo" : "StanzaCombattimento",
-    "nomeStanza" : "",
-    "descrizioneStanza" : "",
+    "nomeStanza" : "Postazione di Guardia",
+    "descrizioneStanza" : "I pilastri di pietra di questa stanza sono scheggiati da profondi colpi d'arma. I goblin hanno improvvisato delle barricate con vecchi mobili del castello",
     "idNord" : -1, "idSud" : -1, "idEst" : -1, "idOvest" : 1,
     "nemiciContenuti" : [
       {
         "tipoNemico" : "GoblinLanciere",
-        "nomeNemico" : "",
-        "puntiVita" : ,
-        "puntiAttacco" : ,
-        "puntiScudo" : ,
-        "distanzaAttacco" :
+        "nomeNemico" : "Vat",
+        "puntiVita" : 60,
+        "puntiAttacco" : 15,
+        "puntiScudo" : 3,
+        "distanzaAttacco" : 2
       },
       {
         "tipoNemico" : "GoblinLanciere",
-        "nomeNemico" : "",
-        "puntiVita" : ,
-        "puntiAttacco" : ,
-        "puntiScudo" : ,
-        "distanzaAttacco" :
+        "nomeNemico" : "Doldaddak",
+        "puntiVita" : 60,
+        "puntiAttacco" : 15,
+        "puntiScudo" : 3,
+        "distanzaAttacco" : 2
       }
     ]
   },
   {
     "idStanza" : 5,
     "tipo" : "StanzaLoot",
-    "nomeStanza" : "",
-    "descrizioneStanza" : "",
-    "idNord" : -1, "idSud" : 3, "idEst" : -1, "idOvest" : -1,
+    "nomeStanza" : "Altare del Crepuscolo",
+    "descrizioneStanza" : "Al centro della stanza, l'oscurità è spezzata da un braciere di fiamme azzurre che fluttuano senza bruciare legna, proiettando ombre sinistre sulla spada Bashil posizionata sopra un piedistallo di pietra nera",
+    "idNord" : 6, "idSud" : 3, "idEst" : -1, "idOvest" : -1,
     "Artefatto" : {
-
+      "tipoArtefatto" : "Arma",
+      "nomeArtefatto" : "Bashil",
+      "descrizioneArtefatto" : "Quest'arma dà 5 punti attacco in più al personaggio che la maneggia",
+      "dannoArma" : 5
     }
   },
   {
-    "idStanza" : 4,
+    "idStanza" : 6,
     "tipo" : "StanzaCombattimento",
-    "nomeStanza" : "",
-    "descrizioneStanza" : "",
-    "idNord" : 6, "idSud" : -1, "idEst" : -1, "idOvest" : 1,
+    "nomeStanza" : "Laboratorio Arcano",
+    "descrizioneStanza" : "L'aria è pesante e satura di fumo violaceo. Tavoli pieni di pergamene bruciate e ampolle alchemiche circondano un cerchio rituale tracciato sul pavimento",
+    "idNord" : 7, "idSud" : 5, "idEst" : -1, "idOvest" : -1,
     "nemiciContenuti" : [
       {
         "tipoNemico" : "Stregone",
-        "nomeNemico" : "",
+        "nomeNemico" : "Gem Gludrig",
         "puntiVita" : 55,
         "puntiAttacco" : 20,
         "puntiScudo" : 2,
@@ -121,7 +124,7 @@
       },
       {
         "tipoNemico" : "Stregone",
-        "nomeNemico" : "",
+        "nomeNemico" : "Nivi Eldace",
         "puntiVita" : 55,
         "puntiAttacco" : 20,
         "puntiScudo" : 2,
@@ -130,10 +133,10 @@
     ]
   },
   {
-    "idStanza" : 6,
+    "idStanza" : 7,
     "tipo" : "StanzaCombattimento",
     "nomeStanza" : "Fine Demo",
     "descrizioneStanza" : "La Demo è terminata",
-    "idNord" : -1, "idSud" : 4, "idEst" : -1, "idOvest" : -1
+    "idNord" : -1, "idSud" : 6, "idEst" : -1, "idOvest" : -1
   }
 ]
