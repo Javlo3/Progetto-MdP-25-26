@@ -2,40 +2,28 @@ package it.unicam.cs.mpgc.rpg125585.backEnd.entita;
 
 public abstract class EntitaGenerale {
 
-    private int vitaMassima;
+    private final int vitaMassima;
+    private final int puntiScudo;
     private int puntiVita;
-    private int puntiAttacco;
-    private int puntiScudo;
-    private int distanzaAttacco;
+    protected int puntiAttacco;
 
-    public EntitaGenerale(int vitaMassima, int puntiAttacco, int puntiScudo, int distanzaAttacco) {
+    public EntitaGenerale(int vitaMassima, int puntiVitaAttuali, int puntiAttacco, int puntiScudo) {
         this.vitaMassima = vitaMassima;
-        this.puntiVita = vitaMassima;
+        this.puntiVita = puntiVitaAttuali;
         this.puntiAttacco = puntiAttacco;
         this.puntiScudo = puntiScudo;
-        this.distanzaAttacco = distanzaAttacco;
     }
 
+    //Lo scudo non scende mai, protegge sempre il giocatore senza mai rompersi
     public void dannoRicevuto(int danno) {
         int dannoRealeRicevuto = danno - this.puntiScudo;
-        if(dannoRealeRicevuto < 0) dannoRealeRicevuto = 0;
+        if (dannoRealeRicevuto < 0) dannoRealeRicevuto = 0;
         this.puntiVita -= dannoRealeRicevuto;
-    }
-
-    public boolean attacco(EntitaGenerale bersaglio, int distanzaAttuale) {
-        if(distanzaAttuale <= this.getDistanzaAttacco() ) {
-            bersaglio.dannoRicevuto(this.getPuntiAttacco());
-            return true;
-        }
-        return false;
+        if (this.puntiVita < 0) this.puntiVita = 0;
     }
 
     public int getVitaMassima() {
         return vitaMassima;
-    }
-
-    public void setVitaMassima(int vitaMassima) {
-        this.vitaMassima = vitaMassima;
     }
 
     public int getPuntiVita() {
@@ -50,7 +38,7 @@ public abstract class EntitaGenerale {
         return puntiAttacco;
     }
 
-    public void setPuntiAttacco(int puntiAttacco) {
+    protected void setPuntiAttacco(int puntiAttacco) {
         this.puntiAttacco = puntiAttacco;
     }
 
@@ -58,15 +46,15 @@ public abstract class EntitaGenerale {
         return puntiScudo;
     }
 
-    public void setPuntiScudo(int puntiScudo) {
-        this.puntiScudo = puntiScudo;
-    }
+    /**
+     * Incrementa i punti vita attuali senza mai superare la vita massima.
+     */
+    public void curaRicevuta(int puntiCura) {
+        if (puntiCura < 0) return; // Protezione da valori assurdi
 
-    public int getDistanzaAttacco() {
-        return distanzaAttacco;
-    }
-
-    public void setDistanzaAttacco(int distanzaAttacco) {
-        this.distanzaAttacco = distanzaAttacco;
+        this.puntiVita += puntiCura;
+        if (this.puntiVita > this.vitaMassima) {
+            this.puntiVita = this.vitaMassima;
+        }
     }
 }

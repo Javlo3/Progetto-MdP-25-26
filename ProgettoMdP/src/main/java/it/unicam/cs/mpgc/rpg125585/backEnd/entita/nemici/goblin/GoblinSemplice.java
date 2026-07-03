@@ -4,7 +4,7 @@ import it.unicam.cs.mpgc.rpg125585.backEnd.entita.nemici.Nemico;
 
 public class GoblinSemplice extends Nemico {
 
-    public GoblinSemplice() {
-        super("String", 60, 10,  3, 1);
+    public GoblinSemplice(String nomeNemico, int vitaMassima,int puntiVita, int puntiAttacco, int puntiScudo) {
+        super(nomeNemico, vitaMassima, puntiVita, puntiAttacco, puntiScudo);
     }
 }

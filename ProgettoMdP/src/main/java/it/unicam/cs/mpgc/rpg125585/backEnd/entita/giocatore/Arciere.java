@@ -6,12 +6,8 @@ public class Arciere extends Giocatore {
 
     private Turno turno;
 
-    public Arciere() {
-        super(50, 15, 5, 3);
+    public Arciere(int vitaMassima, int puntiVita, int puntiAttacco, int puntiScudo) {
+        super(vitaMassima, puntiVita, puntiAttacco,puntiScudo);
     }
 
-    public Arciere(int puntiVitaSalvataggio, int puntiAttaccoSalvataggio, int puntiScudoSalvataggio,
-                    int distanzaAttaccoSalvataggio) {
-        super(puntiVitaSalvataggio, puntiAttaccoSalvataggio, puntiScudoSalvataggio, distanzaAttaccoSalvataggio);
-    }
 }

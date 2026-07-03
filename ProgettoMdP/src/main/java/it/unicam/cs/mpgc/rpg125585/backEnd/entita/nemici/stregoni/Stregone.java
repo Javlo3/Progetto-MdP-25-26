@@ -4,7 +4,7 @@ import it.unicam.cs.mpgc.rpg125585.backEnd.entita.nemici.Nemico;
 
 public class Stregone extends Nemico {
 
-    public Stregone() {
-        super("String",55, 20, 2, 3);
+    public Stregone(String nomeNemico, int vitaMassima, int puntiVita, int puntiAttacco, int puntiScudo) {
+        super(nomeNemico, vitaMassima, puntiVita, puntiAttacco, puntiScudo);
     }
 }
