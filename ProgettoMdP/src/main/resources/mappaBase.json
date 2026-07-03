@@ -16,18 +16,18 @@
       {
         "tipoNemico" : "GoblinSemplice",
         "nomeNemico" : "Grith",
+        "vitaMassima" : 60,
         "puntiVita" : 60,
         "puntiAttacco" : 10,
-        "puntiScudo" : 3,
-        "distanzaAttacco" : 1
+        "puntiScudo" : 3
       },
       {
         "tipoNemico" : "GoblinSemplice",
         "nomeNemico" : "Garth",
+        "vitaMassima" : 60,
         "puntiVita" : 60,
         "puntiAttacco" : 10,
-        "puntiScudo" : 3,
-        "distanzaAttacco" : 1
+        "puntiScudo" : 3
       }
     ]
   },
@@ -41,18 +41,18 @@
       {
         "tipoNemico" : "GoblinSemplice",
         "nomeNemico" : "Zuldik",
+        "vitaMassima" : 60,
         "puntiVita" : 60,
         "puntiAttacco" : 10,
-        "puntiScudo" : 3,
-        "distanzaAttacco" : 1
+        "puntiScudo" : 3
       },
       {
         "tipoNemico" : "GoblinLanciere",
         "nomeNemico" : "Beardung",
-        "puntiVita" : 60,
+        "vitaMassima" : 50,
+        "puntiVita" : 50,
         "puntiAttacco" : 15,
-        "puntiScudo" : 3,
-        "distanzaAttacco" : 2
+        "puntiScudo" : 3
       }
     ]
   },
@@ -79,18 +79,18 @@
       {
         "tipoNemico" : "GoblinLanciere",
         "nomeNemico" : "Vat",
-        "puntiVita" : 60,
+        "vitaMassima" : 50,
+        "puntiVita" : 50,
         "puntiAttacco" : 15,
-        "puntiScudo" : 3,
-        "distanzaAttacco" : 2
+        "puntiScudo" : 3
       },
       {
         "tipoNemico" : "GoblinLanciere",
         "nomeNemico" : "Doldaddak",
-        "puntiVita" : 60,
+        "vitaMassima" : 50,
+        "puntiVita" : 50,
         "puntiAttacco" : 15,
-        "puntiScudo" : 3,
-        "distanzaAttacco" : 2
+        "puntiScudo" : 3
       }
     ]
   },
@@ -117,18 +117,18 @@
       {
         "tipoNemico" : "Stregone",
         "nomeNemico" : "Gem Gludrig",
+        "vitaMassima" : 55,
         "puntiVita" : 55,
         "puntiAttacco" : 20,
-        "puntiScudo" : 2,
-        "distanzaAttacco" : 3
+        "puntiScudo" : 2
       },
       {
         "tipoNemico" : "Stregone",
         "nomeNemico" : "Nivi Eldace",
+        "vitaMassima" : 55,
         "puntiVita" : 55,
         "puntiAttacco" : 20,
-        "puntiScudo" : 2,
-        "distanzaAttacco" : 3
+        "puntiScudo" : 2
       }
     ]
   },
