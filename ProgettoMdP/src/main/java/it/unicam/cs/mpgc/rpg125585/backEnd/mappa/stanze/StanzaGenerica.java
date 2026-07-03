@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg125585.backEnd.mappa.stanze;
 
 public abstract class StanzaGenerica {
+    private final int idStanza;
     private final String nomeStanza;
     private final String descrizioneStanza;
     private StanzaGenerica stanzaNord;
@@ -8,9 +9,14 @@ public abstract class StanzaGenerica {
     private StanzaGenerica stanzaEst;
     private StanzaGenerica stanzaOvest;
 
-    public StanzaGenerica(String nome, String descrizioneStanza) {
+    public StanzaGenerica(int idStanza, String nome, String descrizioneStanza) {
+        this.idStanza = idStanza;
         this.nomeStanza = nome;
         this.descrizioneStanza = descrizioneStanza;
+    }
+
+    public int getIdStanza() {
+        return idStanza;
     }
 
     public String getNomeStanza() {
@@ -21,35 +27,11 @@ public abstract class StanzaGenerica {
         return descrizioneStanza;
     }
 
-    public StanzaGenerica getStanzaNord() {
-        return stanzaNord;
-    }
-
-    public void setStanzaNord(StanzaGenerica stanzaNord) {
+    public void setCollegamenti(StanzaGenerica stanzaNord, StanzaGenerica stanzaSud, StanzaGenerica stanzaEst,
+                                StanzaGenerica stanzaOvest) {
         this.stanzaNord = stanzaNord;
-    }
-
-    public StanzaGenerica getStanzaSud() {
-        return stanzaSud;
-    }
-
-    public void setStanzaSud(StanzaGenerica stanzaSud) {
         this.stanzaSud = stanzaSud;
-    }
-
-    public StanzaGenerica getStanzaEst() {
-        return stanzaEst;
-    }
-
-    public void setStanzaEst(StanzaGenerica stanzaEst) {
         this.stanzaEst = stanzaEst;
-    }
-
-    public StanzaGenerica getStanzaOvest() {
-        return stanzaOvest;
-    }
-
-    public void setStanzaOvest(StanzaGenerica stanzaOvest) {
         this.stanzaOvest = stanzaOvest;
     }
 }

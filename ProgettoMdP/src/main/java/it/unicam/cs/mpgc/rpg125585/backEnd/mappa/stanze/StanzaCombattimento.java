@@ -2,6 +2,7 @@ package it.unicam.cs.mpgc.rpg125585.backEnd.mappa.stanze;
 
 import it.unicam.cs.mpgc.rpg125585.backEnd.entita.nemici.Nemico;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -9,9 +10,15 @@ public class StanzaCombattimento extends StanzaGenerica {
 
     private final List<Nemico> nemiciStanza;
 
-    public StanzaCombattimento(String nomeStanza, String descrizioneStanza, List<Nemico> nemiciStanza) {
-        super(nomeStanza, descrizioneStanza);
-        this.nemiciStanza = nemiciStanza;
+    public StanzaCombattimento(int idStanza, String nomeStanza, String descrizioneStanza) {
+        super(idStanza, nomeStanza, descrizioneStanza);
+        this.nemiciStanza = new ArrayList<>();
+    }
+
+    public void aggiungiNemico(Nemico nemico) {
+        if (nemico != null) {
+            this.nemiciStanza.add(nemico);
+        }
     }
 
     public List<Nemico> getNemiciStanza() {
