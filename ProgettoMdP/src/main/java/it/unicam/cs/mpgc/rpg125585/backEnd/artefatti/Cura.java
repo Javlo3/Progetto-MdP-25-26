@@ -14,13 +14,9 @@ public class Cura extends Artefatto{
         return puntiCura;
     }
 
-    public boolean usaCura(Giocatore bersaglio){
-        if(bersaglio.getPuntiVita() < bersaglio.getVitaMassima()) {
-            int vitaPostCura = bersaglio.getPuntiVita() + puntiCura;
-            if(vitaPostCura > bersaglio.getVitaMassima()) {
-                vitaPostCura = bersaglio.getVitaMassima();
-            }
-            bersaglio.setPuntiVita(vitaPostCura);
+    public boolean usaCura(Giocatore bersaglio) {
+        if (bersaglio.getPuntiVita() < bersaglio.getVitaMassima()) {
+            bersaglio.curaRicevuta(this.puntiCura); // Diciamo all'oggetto cosa fare!
             return true;
         }
         return false;

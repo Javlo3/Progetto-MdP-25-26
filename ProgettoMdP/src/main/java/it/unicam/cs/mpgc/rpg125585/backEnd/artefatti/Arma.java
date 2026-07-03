@@ -16,7 +16,6 @@ public class Arma extends Artefatto{
     }
 
     public void equipaggiaA(Giocatore giocatore) {
-        int danniPostEquipaggiamento = giocatore.getPuntiAttacco() + dannoArma;
-        giocatore.setPuntiAttacco(danniPostEquipaggiamento);
+        giocatore.aumentaAttaccoDaArma(this.dannoArma); // L'incapsulamento è salvo
     }
 }
