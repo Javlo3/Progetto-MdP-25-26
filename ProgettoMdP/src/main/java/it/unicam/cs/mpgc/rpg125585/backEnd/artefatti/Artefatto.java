@@ -19,12 +19,4 @@ public abstract class Artefatto {
         return descrizioneArtefatto;
     }
 
-    public static Artefatto creaDaDTO(ArtefattoDTO dto) {
-        if ("Arma".equals(dto.getTipoArtefatto())) {
-            return new Arma(dto.getNomeArtefatto(), dto.getDescrizioneArtefatto(), dto.getDannoArma());
-        } else if ("Cura".equals(dto.getTipoArtefatto())) {
-            return new Cura(dto.getNomeArtefatto(), dto.getDescrizioneArtefatto(), dto.getPuntiCura());
-        }
-        return null;
-    }
 }
