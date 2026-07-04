@@ -17,19 +17,4 @@ public abstract class Nemico extends EntitaGenerale{
     public String getNomeNemico() {
         return nomeNemico;
     }
-
-    // Dentro la classe Nemico (o una classe di utilità nei nemici)
-    public static Nemico creaDaDTO(NemicoDTO dto) {
-        return switch (dto.getTipoNemico()) {
-            case "GoblinSemplice" ->
-                    new GoblinSemplice(dto.getNomeNemico(), dto.getVitaMassima(), dto.getPuntiVita(),
-                            dto.getPuntiAttacco(), dto.getPuntiScudo());
-            case "GoblinLanciere" ->
-                    new GoblinLanciere(dto.getNomeNemico(), dto.getVitaMassima(), dto.getPuntiVita(),
-                            dto.getPuntiAttacco(), dto.getPuntiScudo());
-            case "Stregone" -> new Stregone(dto.getNomeNemico(), dto.getVitaMassima(), dto.getPuntiVita(),
-                    dto.getPuntiAttacco(), dto.getPuntiScudo());
-            default -> throw new IllegalArgumentException("Tipo nemico sconosciuto");
-        };
-    }
 }
