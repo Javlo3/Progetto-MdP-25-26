@@ -27,6 +27,22 @@ public abstract class StanzaGenerica {
         return descrizioneStanza;
     }
 
+    public StanzaGenerica getStanzaNord() {
+        return stanzaNord;
+    }
+
+    public StanzaGenerica getStanzaSud() {
+        return stanzaSud;
+    }
+
+    public StanzaGenerica getStanzaEst() {
+        return stanzaEst;
+    }
+
+    public StanzaGenerica getStanzaOvest() {
+        return stanzaOvest;
+    }
+
     public void setCollegamenti(StanzaGenerica stanzaNord, StanzaGenerica stanzaSud, StanzaGenerica stanzaEst,
                                 StanzaGenerica stanzaOvest) {
         this.stanzaNord = stanzaNord;
@@ -34,4 +50,5 @@ public abstract class StanzaGenerica {
         this.stanzaEst = stanzaEst;
         this.stanzaOvest = stanzaOvest;
     }
+
 }

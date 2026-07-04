@@ -15,14 +15,14 @@ public class StanzaCombattimento extends StanzaGenerica {
         this.nemiciStanza = new ArrayList<>();
     }
 
+    public List<Nemico> getNemiciStanza() {
+        return Collections.unmodifiableList(nemiciStanza);
+    }
+
     public void aggiungiNemico(Nemico nemico) {
         if (nemico != null) {
             this.nemiciStanza.add(nemico);
         }
-    }
-
-    public List<Nemico> getNemiciStanza() {
-        return Collections.unmodifiableList(nemiciStanza);
     }
 
     public boolean haNemiciVivi() {
