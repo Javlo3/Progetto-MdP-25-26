@@ -23,4 +23,12 @@ public class StanzaLoot extends StanzaGenerica {
             this.artefattiStanza.add(artefatto);
         }
     }
+
+
+    public Artefatto getArtefatto() {
+        if(this.artefattiStanza == null ||this.artefattiStanza.isEmpty()){
+            return null;
+        }
+            return this.artefattiStanza.getFirst();
+    }
 }
