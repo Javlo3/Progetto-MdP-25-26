@@ -15,7 +15,8 @@ public class ArtefattoDTO {
     public ArtefattoDTO() {
     }
 
-    public ArtefattoDTO(String tipoArtefatto, String nomeArtefatto, String descrizioneArtefatto, int puntiCura, int dannoArma) {
+    public ArtefattoDTO(String tipoArtefatto, String nomeArtefatto, String descrizioneArtefatto, int puntiCura,
+                        int dannoArma) {
         this.tipoArtefatto = tipoArtefatto;
         this.nomeArtefatto = nomeArtefatto;
         this.descrizioneArtefatto = descrizioneArtefatto;

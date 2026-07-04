@@ -9,17 +9,26 @@ public class StanzaDTO {
 
     private int idStanza;
     private String nomeStanza;
+    private String descrizioneStanza;
     private List<NemicoDTO> nemiciNellaStanza;
     private List<ArtefattoDTO> artefattiNellaStanza;
+    private int idStanzaNord, idStanzaSud, idStanzaEst, idStanzaOvest;
 
     public StanzaDTO() {
     }
 
-    public StanzaDTO(int idStanza, String nomeStanza, List<NemicoDTO> nemiciNellaStanza, List<ArtefattoDTO> artefattiNellaStanza) {
+    public StanzaDTO(int idStanza, String nomeStanza, String descrizioneStanza,List<NemicoDTO> nemiciNellaStanza,
+                     List<ArtefattoDTO> artefattiNellaStanza, int idStanzaNord, int idStanzaSud,
+                     int idStanzaEst, int idStanzaOvest) {
         this.idStanza = idStanza;
         this.nomeStanza = nomeStanza;
+        this.descrizioneStanza = descrizioneStanza;
         this.nemiciNellaStanza = nemiciNellaStanza;
         this.artefattiNellaStanza = artefattiNellaStanza;
+        this.idStanzaNord = idStanzaNord;
+        this.idStanzaSud = idStanzaSud;
+        this.idStanzaEst = idStanzaEst;
+        this.idStanzaOvest = idStanzaOvest;
     }
 
     public StanzaDTO(StanzaGenerica stanza) {
@@ -31,8 +40,15 @@ public class StanzaDTO {
                     .toList();
         }
         if (stanza instanceof StanzaLoot sLoot) {
-            this.artefattiNellaStanza = Collections.singletonList(new ArtefattoDTO(sLoot.getArtefatto()));
+            if(sLoot.getArtefatto() != null) {
+                this.artefattiNellaStanza = Collections.singletonList(new ArtefattoDTO(sLoot.getArtefatto()));
+            }
         }
+
+        this.idStanzaNord = (stanza.getStanzaNord() != null ) ? stanza.getStanzaNord().getIdStanza() : -1;
+        this.idStanzaSud = (stanza.getStanzaSud() != null ) ? stanza.getStanzaSud().getIdStanza() : -1;
+        this.idStanzaEst = (stanza.getStanzaEst() != null ) ? stanza.getStanzaEst().getIdStanza() : -1;
+        this.idStanzaOvest = (stanza.getStanzaOvest() != null ) ? stanza.getStanzaOvest().getIdStanza() : -1;
     }
 
     public int getIdStanza() {
@@ -49,5 +65,25 @@ public class StanzaDTO {
 
     public List<ArtefattoDTO> getArtefattiNellaStanza() {
         return artefattiNellaStanza;
+    }
+
+    public int getIdStanzaNord() {
+        return idStanzaNord;
+    }
+
+    public int getIdStanzaSud() {
+        return idStanzaSud;
+    }
+
+    public int getIdStanzaEst() {
+        return idStanzaEst;
+    }
+
+    public int getIdStanzaOvest() {
+        return idStanzaOvest;
+    }
+
+    public String getDescrizioneStanza() {
+        return descrizioneStanza;
     }
 }

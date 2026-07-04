@@ -11,7 +11,6 @@ import it.unicam.cs.mpgc.rpg125585.backEnd.entita.giocatore.Giocatore;
 public class GiocatoreDTO {
 
     private String tipoClasse; // Memorizza la classe specifica (es. "Cavaliere", "Arciere", "Mago")
-    private int idStanzaCorrente; // Riferimento leggero alla stanza in cui si trova il giocatore
     private int vitaMassima;
     private int puntiVita;
     private int puntiAttacco;
@@ -28,9 +27,8 @@ public class GiocatoreDTO {
      * Costruttore completo utilizzato principalmente in fase di caricamento dal JSON
      * per mappare esplicitamente tutti i campi primitivi.
      */
-    public GiocatoreDTO(String tipoClasse, int idStanzaCorrente, int vitaMassima, int puntiVita, int puntiAttacco, int puntiScudo) {
+    public GiocatoreDTO(String tipoClasse, int vitaMassima, int puntiVita, int puntiAttacco, int puntiScudo) {
         this.tipoClasse = tipoClasse;
-        this.idStanzaCorrente = idStanzaCorrente;
         this.vitaMassima = vitaMassima;
         this.puntiVita = puntiVita;
         this.puntiAttacco = puntiAttacco;
@@ -38,14 +36,12 @@ public class GiocatoreDTO {
     }
 
     /**
-     * Costruttore di convenienza (Factory/Mapping) utilissimo per il SALVATAGGIO.
+     * Costruttore di convenienza (Factory/Mapping) utilissimo per il salvataggio.
      * Prende il giocatore in memoria e ne estrae automaticamente lo stato primitivo.
      * * @param giocatore L'istanza del giocatore attivo nel gioco.
-     * @param idStanzaCorrente L'identificativo numerico o la stringa della stanza in cui si trova.
      */
-    public GiocatoreDTO(Giocatore giocatore, int idStanzaCorrente) {
+    public GiocatoreDTO(Giocatore giocatore) {
         this.tipoClasse = giocatore.getClass().getSimpleName(); // Estrae "Cavaliere", "Arciere", ecc.
-        this.idStanzaCorrente = idStanzaCorrente;
         this.vitaMassima = giocatore.getVitaMassima();
         this.puntiVita = giocatore.getPuntiVita();
         this.puntiAttacco = giocatore.getPuntiAttacco();
@@ -56,10 +52,6 @@ public class GiocatoreDTO {
 
     public String getTipoClasse() {
         return tipoClasse;
-    }
-
-    public int getIdStanzaCorrente() {
-        return idStanzaCorrente;
     }
 
     public int getVitaMassima() {
