@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg125585.backEnd.gestioneTurno;
+package it.unicam.cs.mpgc.rpg125585.backEnd.gestioneCombattimenti;
 
 import it.unicam.cs.mpgc.rpg125585.backEnd.entita.giocatore.Giocatore;
 import it.unicam.cs.mpgc.rpg125585.backEnd.entita.nemici.Nemico;
@@ -73,6 +73,10 @@ public class GestoreCombattimento {
      */
     public boolean ciSonoNemiciVivi() {
         return this.nemicoAgganciato != null;
+    }
+
+    public boolean giocatoreMorto() {
+        return this.giocatore.getPuntiVita() <= 0;
     }
 
     // Getter utili per la GUI per sapere chi evidenziare a schermo e la lista totale
