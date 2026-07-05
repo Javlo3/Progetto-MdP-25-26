@@ -1,6 +1,8 @@
 package it.unicam.cs.mpgc.rpg125585.backEnd.mappa;
 
 import it.unicam.cs.mpgc.rpg125585.backEnd.mappa.stanze.StanzaGenerica;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,5 +26,9 @@ public class Mappa {
 
     public int getIdStanzaIniziale() {
         return idStanzaIniziale;
+    }
+
+    public Map<Integer, StanzaGenerica> getStanze() {
+        return Collections.unmodifiableMap(this.stanze);
     }
 }
