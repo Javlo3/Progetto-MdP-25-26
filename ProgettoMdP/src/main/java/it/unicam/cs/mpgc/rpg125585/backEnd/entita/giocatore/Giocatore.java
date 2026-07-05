@@ -1,6 +1,5 @@
 package it.unicam.cs.mpgc.rpg125585.backEnd.entita.giocatore;
 
-import it.unicam.cs.mpgc.rpg125585.backEnd.gestioneTurno.Turno;
 import it.unicam.cs.mpgc.rpg125585.backEnd.entita.EntitaGenerale;
 import it.unicam.cs.mpgc.rpg125585.backEnd.mappa.stanze.StanzaGenerica;
 
