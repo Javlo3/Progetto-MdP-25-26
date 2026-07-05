@@ -6,6 +6,7 @@ import it.unicam.cs.mpgc.rpg125585.backEnd.utils.GestoreFile;
 import it.unicam.cs.mpgc.rpg125585.dto.*;
 
 import java.util.List;
+import java.util.Map;
 
 public class ConvertitorePartita {
     private final GestoreFile gestoreFile = new GestoreFile();
@@ -19,15 +20,18 @@ public class ConvertitorePartita {
     public StatoGiocoLocale inizializzaNuovaPartita(String classeScelta, String percorsoSalvataggio) {
         // 1. Legge i DTO della mappa vergine immodificabile dalle risorse interne
         List<StanzaDTO> mappaBaseDto = gestoreFile.caricaMappaBase("mappabase.json");
+        if(mappaBaseDto == null){
+            throw new IllegalStateException("Impossibile caricare la mappa base dalle risorse");
+        }
         // 2. Trasforma i DTO in stanze reali tramite il ConvertitoreMappa
-        List<StanzaGenerica> stanzeReali = convertitoreMappa.mappaDaDtoADominio(mappaBaseDto);
+        Map<Integer, StanzaGenerica> stanzeReali = convertitoreMappa.mappaDaDtoADominio(mappaBaseDto);
         // 3. Genera un eroe fresco di zecca tramite Factory polimorfica
         Giocatore eroeReale = istanziaNuovoEroe(classeScelta);
         // 4. Posiziona l'eroe nella stanza iniziale (assumiamo ID 1)
-        StanzaGenerica stanzaIniziale = stanzeReali.stream()
-                .filter(s -> s.getIdStanza() == 1)
-                .findFirst()
-                .orElse(stanzeReali.get(0));
+        StanzaGenerica stanzaIniziale = stanzeReali.get(1);
+        if(stanzaIniziale == null){
+            stanzaIniziale = stanzeReali.values().iterator().next();
+        }
         eroeReale.setStanzaCorrente(stanzaIniziale);
         // 5. ESEGUE IL PRIMO SALVATAGGIO AUTOMATICO IMMEDIATO SU DISCO
         SalvataggioDTO primoSalvataggio = creaSalvataggioDati(eroeReale, stanzeReali);
@@ -44,14 +48,15 @@ public class ConvertitorePartita {
             throw new IllegalStateException("Nessun salvataggio trovato al percorso: " + percorsoSalvataggio);
         }
         // 1. Ricostruisce la mappa modificata
-        List<StanzaGenerica> stanzeReali = convertitoreMappa.mappaDaDtoADominio(salvataggioDTO.getMappaStanze());
+        Map<Integer, StanzaGenerica> stanzeReali = convertitoreMappa.mappaDaDtoADominio(salvataggioDTO.getMappaStanze());
         // 2. Ricostruisce l'eroe con le sue vecchie statistiche
         Giocatore eroeReale = ricostruisciEroeDaDto(salvataggioDTO.getGiocatore());
-        // 3. Riposiziona l'eroe al suo posto usando l'ID centrale del salvataggio
-        StanzaGenerica stanzaCorrente = stanzeReali.stream()
-                .filter(s -> s.getIdStanza() == salvataggioDTO.getIdStanzaCorrente())
-                .findFirst()
-                .orElseThrow(() -> new IllegalStateException("Errore critico: Stanza corrente non trovata!"));
+        // 3. Riposiziona l'eroe al suo posto usando l'accesso della mappa
+        int idCorrente = salvataggioDTO.getIdStanzaCorrente();
+        StanzaGenerica stanzaCorrente = stanzeReali.get(idCorrente);
+        if(stanzaCorrente == null){
+            throw new IllegalStateException("Errore critico: Stanza corrente con ID: " + idCorrente + " non trovata");
+        }
         eroeReale.setStanzaCorrente(stanzaCorrente);
         return new StatoGiocoLocale(eroeReale, stanzeReali);
     }
@@ -59,12 +64,12 @@ public class ConvertitorePartita {
     /**
      * SCENARIO 3: Salvataggio in corso di gioco (Aggiorna il file esistente)
      */
-    public void salvaPartitaInCorso(String percorsoSalvataggio, Giocatore eroe, List<StanzaGenerica> mappaCompleta) {
+    public void salvaPartitaInCorso(String percorsoSalvataggio, Giocatore eroe, Map<Integer, StanzaGenerica> mappaCompleta) {
         SalvataggioDTO salvataggioDTO = creaSalvataggioDati(eroe, mappaCompleta);
         gestoreFile.salvaPartita(percorsoSalvataggio, salvataggioDTO);
     }
 
-    private SalvataggioDTO creaSalvataggioDati(Giocatore eroe, List<StanzaGenerica> mappaCompleta) {
+    private SalvataggioDTO creaSalvataggioDati(Giocatore eroe, Map<Integer, StanzaGenerica> mappaCompleta) {
         GiocatoreDTO giocatoreDTO = new GiocatoreDTO(eroe);
         List<StanzaDTO> stanzeDTO = convertitoreMappa.mappaADominioDto(mappaCompleta);
         int idStanzaAttuale = eroe.getStanzaCorrente().getIdStanza();

@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ConvertitoreMappa {
 
-    public List<StanzaGenerica> mappaDaDtoADominio(List<StanzaDTO> stanzeDTO) {
+    public Map<Integer, StanzaGenerica> mappaDaDtoADominio(List<StanzaDTO> stanzeDTO) {
         Map<Integer, StanzaGenerica> mappaStanze = new HashMap<>();
         for (StanzaDTO stanzaSingolaDTO : stanzeDTO) {
             mappaStanze.put(stanzaSingolaDTO.getIdStanza(), creaStanzaSingolaDaDto(stanzaSingolaDTO));
@@ -26,11 +26,11 @@ public class ConvertitoreMappa {
                     mappaStanze.get(stanzaSingolaDTO.getIdStanzaOvest())
             );
         }
-        return List.copyOf(mappaStanze.values());
+        return Map.copyOf(mappaStanze);
     }
 
-    public List<StanzaDTO> mappaADominioDto(List<StanzaGenerica> mappaCompleta) {
-        return mappaCompleta
+    public List<StanzaDTO> mappaADominioDto(Map<Integer, StanzaGenerica> mappaCompleta) {
+        return mappaCompleta.values()
                 .stream()
                 .map(StanzaDTO::new)
                 .toList();
