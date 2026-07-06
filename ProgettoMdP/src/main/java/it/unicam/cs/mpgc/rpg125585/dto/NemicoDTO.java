@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg125585.dto;
 
-import it.unicam.cs.mpgc.rpg125585.backEnd.entita.nemici.Nemico;
+import it.unicam.cs.mpgc.rpg125585.backend.entita.nemici.Nemico;
 
 public class NemicoDTO {
 

@@ -1,8 +1,8 @@
 package it.unicam.cs.mpgc.rpg125585.dto;
 
-import it.unicam.cs.mpgc.rpg125585.backEnd.artefatti.Arma;
-import it.unicam.cs.mpgc.rpg125585.backEnd.artefatti.Artefatto;
-import it.unicam.cs.mpgc.rpg125585.backEnd.artefatti.Cura;
+import it.unicam.cs.mpgc.rpg125585.backend.artefatti.Arma;
+import it.unicam.cs.mpgc.rpg125585.backend.artefatti.Artefatto;
+import it.unicam.cs.mpgc.rpg125585.backend.artefatti.Cura;
 
 public class ArtefattoDTO {
 

@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg125585.dto;
 
-import it.unicam.cs.mpgc.rpg125585.backEnd.entita.giocatore.Giocatore;
+import it.unicam.cs.mpgc.rpg125585.backend.entita.giocatore.Giocatore;
 
 /**
  * Data Transfer Object (DTO) per la classe Giocatore.
