@@ -15,7 +15,7 @@ application {
 }
 
 dependencies {
-    val javafxVersion = "25-ea+5"
+    val javafxVersion = "25.0.3"
     val osName = System.getProperty("os.name").lowercase()
     val platform = when {
         osName.contains("win") -> "win"
