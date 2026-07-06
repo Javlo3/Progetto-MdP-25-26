@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg125585;
 
 import javafx.application.Application;
+
 import it.unicam.cs.mpgc.rpg125585.gui.InterfacciaGrafica;
 
 public class Main {
