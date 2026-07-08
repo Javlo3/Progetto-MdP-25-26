@@ -1,4 +1,93 @@
 package it.unicam.cs.mpgc.rpg125585.gui;
 
+import it.unicam.cs.mpgc.rpg125585.backend.utils.GestoreFile;
+import it.unicam.cs.mpgc.rpg125585.dto.SalvataggioDTO;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Optional;
+
 public class MenuPrincipaleController {
+    @FXML
+    private Button btnNuovaPartita;
+    @FXML
+    private Button btnCaricaPartita;
+
+    private final String pathSalvataggio = "salvataggi/salvataggio.json";
+    private final GestoreFile gestoreFile = new GestoreFile();
+
+    public void handleCaricaPartita(ActionEvent event) {
+        if (!gestoreFile.esisteSalvataggio(pathSalvataggio)) {
+            mostraAllertaErrore("Nessun salvataggio trovato", "Non ci sono partite salvate. Inizia una nuova avventura!");
+        } else {
+            System.out.println("Caricamento partita in corso...");
+
+            // Usiamo il tuo metodo che restituisce direttamente il DTO già mappato
+            SalvataggioDTO partitaCaricata = gestoreFile.caricaPartitaSalvata(pathSalvataggio);
+
+            if (partitaCaricata != null) {
+                cambiaSchermataGioco(event, partitaCaricata);
+            } else {
+                mostraAllertaErrore("Errore di Caricamento", "Il file di salvataggio è corrotto o illeggibile.");
+            }
+        }
+    }
+
+    public void handleNuovaPartita(ActionEvent event) {
+        if(gestoreFile.esisteSalvataggio(pathSalvataggio)) {
+            Alert alertConferma = new Alert(Alert.AlertType.CONFIRMATION);
+            alertConferma.setTitle("Attenzione: Salvataggio già esistente");
+            alertConferma.setHeaderText("C'è già una partita salvata");
+            alertConferma.setContentText("Se ne inizi una nuova, quest'ultima sovrascriverà il salvataggio precedente. " +
+                    "Sei sicuro di voler continuare?");
+            Optional<ButtonType> risultato = alertConferma.showAndWait();
+            if(risultato.isPresent() && risultato.get() == ButtonType.OK){
+                cambiaSchermata(event);
+            }
+        } else {
+            cambiaSchermata(event);
+        }
+    }
+
+    private void cambiaSchermata(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/schermata_scelta_classe.fxml"));
+            Parent root = loader.load();
+            Button sorgente = (Button) event.getSource();
+            Stage stageCorrente = (Stage) sorgente.getScene().getWindow();
+            stageCorrente.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void cambiaSchermataGioco(ActionEvent event, SalvataggioDTO partita) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/schermata_gioco.fxml"));
+        try {
+            Parent root = loader.load();
+            GiocoController giocoController = loader.getController();
+            giocoController.inizializzaInterfaccia(partita);
+            Stage stageCorrente = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stageCorrente.setScene(new Scene(root));
+        } catch (IOException e) {
+            System.err.println("Errore nel caricamento di schermata_gioco.fxml");
+            e.printStackTrace();
+        }
+    }
+
+    private void mostraAllertaErrore(String titolo, String contenuto) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText(titolo);
+        alert.setContentText(contenuto);
+        alert.showAndWait();
+    }
 }
