@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #8B4513;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #8B4513;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -18,20 +13,35 @@
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
             </Label>
             <Label fx:id="lblDescrizioneStanza" text="Descrizione Stanza" textFill="WHITE" wrapText="true">
                <font>
-                  <Font size="14.0" />
+                  <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
             </Label>
-            <VBox alignment="CENTER" prefHeight="89.0" prefWidth="600.0">
+            <VBox alignment="CENTER" prefHeight="89.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                <children>
                   <Label fx:id="lblNomeArtefatto" alignment="CENTER" contentDisplay="CENTER" text="Nome Artefatto" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </Label>
-                  <Label fx:id="lblDescrizioneArtefatto" alignment="CENTER" text="Descrizione Artefatto" textFill="WHITE" />
+                  <Label fx:id="lblDescrizioneArtefatto" alignment="CENTER" text="Descrizione Artefatto" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin></Label>
                </children>
             </VBox>
          </children>
@@ -50,11 +60,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnStanzaNord" mnemonicParsing="false" text="Stanza Nord" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-            <Button fx:id="btnStanzaOvest" mnemonicParsing="false" text="Stanza Ovest" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button fx:id="btnStanzaEst" mnemonicParsing="false" text="Stanza Est" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button fx:id="btnStanzaSud" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Stanza Sud" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Button fx:id="btnPrendiArtefatto" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: ffd700;" text="Prendi Artefatto" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <Button fx:id="btnStanzaNord" mnemonicParsing="false" text="Stanza Nord" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+            <Button fx:id="btnStanzaOvest" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Stanza Ovest" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+            <Button fx:id="btnStanzaEst" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Stanza Est" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+            <Button fx:id="btnStanzaSud" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Stanza Sud" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+            <Button fx:id="btnPrendiArtefatto" alignment="CENTER" mnemonicParsing="false" prefHeight="42.0" prefWidth="102.0" style="-fx-background-color: ffd700;" text="Prendi Artefatto" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -65,10 +75,10 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="145.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblGiocatore" text="Giocatore" textFill="WHITE" />
-            <Label fx:id="lblVitaGiocatore" text="Vita" textFill="WHITE" />
-            <Label fx:id="lblScudoGiocatore" text="Scudo" textFill="WHITE" />
-            <Label fx:id="lblAttaccoGiocatore" text="Attacco" textFill="WHITE" />
+            <Label fx:id="lblGiocatore" text="Classe Giocatore" textFill="WHITE" VBox.vgrow="ALWAYS" />
+            <Label fx:id="lblVitaGiocatore" text="Vita Giocatore" textFill="WHITE" VBox.vgrow="ALWAYS" />
+            <Label fx:id="lblAttaccoGiocatore" text="Attacco Giocatore" textFill="WHITE" VBox.vgrow="ALWAYS" />
+            <Label fx:id="lblScudoGiocatore" text="Scudo Giocatore" textFill="WHITE" VBox.vgrow="ALWAYS" />
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" />
@@ -76,12 +86,12 @@
       </VBox>
    </left>
    <right>
-      <VBox prefHeight="200.0" prefWidth="143.0" spacing="20.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="149.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblNomeNemico" text="Nome Nemico" textFill="WHITE" />
-            <Label fx:id="lblVitaNemico" text="Vita Nemico" textFill="WHITE" />
-            <Label fx:id="lblScudoNemico" text="Scudo Nemico" textFill="WHITE" />
-            <Label fx:id="lblAttaccoNemico" text="Attacco Nemico" textFill="WHITE" />
+            <Label fx:id="lblNomeNemico" text="Nome Nemico" textFill="WHITE" VBox.vgrow="ALWAYS" />
+            <Label fx:id="lblVitaNemico" text="Vita Nemico" textFill="WHITE" VBox.vgrow="ALWAYS" />
+            <Label fx:id="lblScudoNemico" text="Scudo Nemico" textFill="WHITE" VBox.vgrow="ALWAYS" />
+            <Label fx:id="lblAttaccoNemico" text="Attacco Nemico" textFill="WHITE" VBox.vgrow="ALWAYS" />
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" />
