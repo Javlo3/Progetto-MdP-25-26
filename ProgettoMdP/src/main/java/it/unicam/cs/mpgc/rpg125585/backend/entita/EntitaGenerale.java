@@ -14,14 +14,6 @@ public abstract class EntitaGenerale {
         this.puntiScudo = puntiScudo;
     }
 
-    //Lo scudo non scende mai, protegge sempre il giocatore senza mai rompersi
-    public void dannoRicevuto(int danno) {
-        int dannoRealeRicevuto = danno - this.puntiScudo;
-        if (dannoRealeRicevuto < 0) dannoRealeRicevuto = 0;
-        this.puntiVita -= dannoRealeRicevuto;
-        if (this.puntiVita < 0) this.puntiVita = 0;
-    }
-
     public int getVitaMassima() {
         return vitaMassima;
     }

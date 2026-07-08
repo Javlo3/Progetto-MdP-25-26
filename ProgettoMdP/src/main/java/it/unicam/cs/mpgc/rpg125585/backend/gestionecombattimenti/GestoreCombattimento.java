@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg125585.backend.gestionecombattimenti;
 
+import it.unicam.cs.mpgc.rpg125585.backend.entita.EntitaGenerale;
 import it.unicam.cs.mpgc.rpg125585.backend.entita.giocatore.Giocatore;
 import it.unicam.cs.mpgc.rpg125585.backend.entita.nemici.Nemico;
 import java.util.List;
@@ -40,17 +41,29 @@ public class GestoreCombattimento {
         }
 
         // 1. Il giocatore colpisce il bersaglio agganciato
-        nemicoAgganciato.dannoRicevuto(giocatore.getPuntiAttacco());
+        dannoRicevuto(giocatore, nemicoAgganciato);
 
         // 2. Se il nemico è morto, aggiorniamo il target. Altrimenti, contrattacca!
         if (nemicoAgganciato.getPuntiVita() <= 0) {
             selezionaProssimoBersaglioAutomatico();
         } else {
             // Solo il nemico agganciato risponde al fuoco
-            giocatore.dannoRicevuto(nemicoAgganciato.getPuntiAttacco());
+            dannoRicevuto(nemicoAgganciato, giocatore);
         }
 
         return true;
+    }
+
+    //Lo scudo non scende mai, protegge sempre l'entità che lo equipaggia senza mai rompersi
+    public void dannoRicevuto(EntitaGenerale attaccante, EntitaGenerale bersaglio) {
+        int dannoRealeRicevuto = attaccante.getPuntiAttacco() - bersaglio.getPuntiScudo();
+        if (dannoRealeRicevuto <= 0){
+            dannoRealeRicevuto = 0;
+        } else {
+            int dannoFinale = bersaglio.getPuntiVita() - dannoRealeRicevuto;
+            bersaglio.setPuntiVita(dannoFinale);
+            if (bersaglio.getPuntiVita() < 0) bersaglio.setPuntiVita(0);
+        }
     }
 
     /**
