@@ -13,6 +13,8 @@ public class StanzaDTO {
     private List<NemicoDTO> nemiciNellaStanza;
     private List<ArtefattoDTO> artefattiNellaStanza;
     private int idStanzaNord, idStanzaSud, idStanzaEst, idStanzaOvest;
+    private boolean isStanzaLoot;
+    private boolean isStanzaCombattimento;
 
     public StanzaDTO() {
     }
@@ -35,11 +37,13 @@ public class StanzaDTO {
         this.idStanza = stanza.getIdStanza();
         this.nomeStanza = stanza.getNomeStanza();
         if (stanza instanceof StanzaCombattimento sComb) {
+            this.isStanzaCombattimento = true;
             this.nemiciNellaStanza = sComb.getNemiciStanza().stream()
                     .map(NemicoDTO::new)
                     .toList();
         }
         if (stanza instanceof StanzaLoot sLoot) {
+            this.isStanzaLoot = true;
             if(sLoot.getArtefatto() != null) {
                 this.artefattiNellaStanza = Collections.singletonList(new ArtefattoDTO(sLoot.getArtefatto()));
             }
@@ -85,5 +89,13 @@ public class StanzaDTO {
 
     public String getDescrizioneStanza() {
         return descrizioneStanza;
+    }
+
+    public boolean isStanzaCombattimento() {
+        return isStanzaCombattimento;
+    }
+
+    public boolean isStanzaLoot() {
+        return isStanzaLoot;
     }
 }
