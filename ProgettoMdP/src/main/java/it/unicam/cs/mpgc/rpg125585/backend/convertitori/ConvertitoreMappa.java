@@ -82,7 +82,7 @@ public class ConvertitoreMappa {
                 case "Arma" -> new Arma(arteDto.getNomeArtefatto(), arteDto.getDescrizioneArtefatto(),
                         arteDto.getDannoArma()
                 );
-                default -> throw new IllegalArgumentException("Tipo artefatto sconosciuto");
+                default -> throw new IllegalArgumentException("Tipo artefatto sconosciuto" + arteDto.getTipoArtefatto());
             };
             stanzaLo.aggiungiArtefatto(arteReale);
         });
