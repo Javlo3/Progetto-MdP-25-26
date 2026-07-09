@@ -1,11 +1,17 @@
 package it.unicam.cs.mpgc.rpg125585.backend.entita.giocatore;
 
+import it.unicam.cs.mpgc.rpg125585.backend.artefatti.Artefatto;
 import it.unicam.cs.mpgc.rpg125585.backend.entita.EntitaGenerale;
 import it.unicam.cs.mpgc.rpg125585.backend.mappa.stanze.StanzaGenerica;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class Giocatore extends EntitaGenerale{
 
     private StanzaGenerica stanzaCorrente;
+    private final List<Artefatto> inventario = new ArrayList<>();
 
     public Giocatore(int vitaMassima, int puntiVita, int puntiAttacco, int puntiScudo) {
         super(vitaMassima, puntiVita, puntiAttacco, puntiScudo);
@@ -19,10 +25,6 @@ public abstract class Giocatore extends EntitaGenerale{
         this.stanzaCorrente = nuovaStanza;
     }
 
-    public void setPuntiAttacco(int puntiAttacco) {
-        this.puntiAttacco = puntiAttacco;
-    }
-
     /**
      * Incrementa i punti attacco del giocatore in base al danno dell'arma raccolta.
      */
@@ -30,5 +32,15 @@ public abstract class Giocatore extends EntitaGenerale{
         if (bonusDanno > 0) {
             this.puntiAttacco += bonusDanno;
         }
+    }
+
+    public void aggiungiAllInventario(Artefatto artefatto) {
+        if (artefatto != null) {
+            this.inventario.add(artefatto);
+        }
+    }
+
+    public List<Artefatto> getInventario() {
+        return Collections.unmodifiableList(this.inventario);
     }
 }
