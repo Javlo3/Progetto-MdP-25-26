@@ -57,9 +57,7 @@ public class GestoreCombattimento {
     //Lo scudo non scende mai, protegge sempre l'entità che lo equipaggia senza mai rompersi
     public void dannoRicevuto(EntitaGenerale attaccante, EntitaGenerale bersaglio) {
         int dannoRealeRicevuto = attaccante.getPuntiAttacco() - bersaglio.getPuntiScudo();
-        if (dannoRealeRicevuto <= 0){
-            dannoRealeRicevuto = 0;
-        } else {
+        if (dannoRealeRicevuto > 0){
             int dannoFinale = bersaglio.getPuntiVita() - dannoRealeRicevuto;
             bersaglio.setPuntiVita(dannoFinale);
             if (bersaglio.getPuntiVita() < 0) bersaglio.setPuntiVita(0);
