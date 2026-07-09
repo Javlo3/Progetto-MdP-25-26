@@ -36,16 +36,26 @@ public class StanzaDTO {
     public StanzaDTO(StanzaGenerica stanza) {
         this.idStanza = stanza.getIdStanza();
         this.nomeStanza = stanza.getNomeStanza();
-        if (stanza instanceof StanzaCombattimento sComb) {
-            this.isStanzaCombattimento = true;
-            this.nemiciNellaStanza = sComb.getNemiciStanza().stream()
-                    .map(NemicoDTO::new)
-                    .toList();
-        }
-        if (stanza instanceof StanzaLoot sLoot) {
-            this.isStanzaLoot = true;
-            if(sLoot.getArtefatto() != null) {
-                this.artefattiNellaStanza = Collections.singletonList(new ArtefattoDTO(sLoot.getArtefatto()));
+        this.descrizioneStanza = stanza.getDescrizioneStanza();
+        this.isStanzaCombattimento = false;
+        this.isStanzaLoot = false;
+        switch (stanza) {
+            case StanzaCombattimento sComb -> {
+                this.isStanzaCombattimento = true;
+                this.nemiciNellaStanza = sComb.getNemiciStanza().stream()
+                        .map(NemicoDTO::new)
+                        .toList();
+            }
+            case StanzaLoot sLoot -> {
+                this.isStanzaLoot = true;
+                if (sLoot.getArtefattiStanza() != null && !sLoot.getArtefattiStanza().isEmpty()) {
+                    this.artefattiNellaStanza = sLoot.getArtefattiStanza().stream()
+                            .map(ArtefattoDTO::new)
+                            .toList();
+                }
+            }
+            default -> {
+                // Stanza normale/corridoio: non richiede dati aggiuntivi
             }
         }
 

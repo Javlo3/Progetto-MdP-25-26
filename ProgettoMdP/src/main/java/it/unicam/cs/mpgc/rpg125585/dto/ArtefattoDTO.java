@@ -28,13 +28,13 @@ public class ArtefattoDTO {
         this.tipoArtefatto = artefatto.getClass().getSimpleName();
         this.nomeArtefatto = artefatto.getNomeArtefatto();
         this.descrizioneArtefatto = artefatto.getDescrizioneArtefatto();
-        if(artefatto instanceof Arma) {
-            this.dannoArma = ((Arma) artefatto).getDannoArma();
-            this.puntiCura = 0;
-        }
-        else {
-            this.puntiCura = ((Cura) artefatto).getPuntiCura();
-            this.dannoArma = 0;
+        this.dannoArma = 0;
+        this.puntiCura = 0;
+        switch(artefatto) {
+            case Arma arma -> this.dannoArma = arma.getDannoArma();
+            case Cura cura -> this.puntiCura = cura.getPuntiCura();
+            default -> throw new IllegalArgumentException("Tipo artefatto non supportato per la serializzazione: " +
+                    artefatto.getClass());
         }
     }
 
