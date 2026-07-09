@@ -19,15 +19,11 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class MenuPrincipaleController {
-    @FXML
-    private Button btnNuovaPartita;
-    @FXML
-    private Button btnCaricaPartita;
-
     private final String pathSalvataggio = "salvataggi/salvataggio.json";
     private final GestoreFile gestoreFile = new GestoreFile();
     private final ConvertitorePartita convertitorePartita = new ConvertitorePartita();
 
+    @FXML
     public void handleCaricaPartita(ActionEvent event) {
         if (!gestoreFile.esisteSalvataggio(pathSalvataggio)) {
             mostraAllertaErrore("Nessun salvataggio trovato", "Non ci sono partite salvate. Inizia una nuova avventura!");
@@ -54,6 +50,7 @@ public class MenuPrincipaleController {
         }
     }
 
+    @FXML
     public void handleNuovaPartita(ActionEvent event) {
         if (gestoreFile.esisteSalvataggio(pathSalvataggio)) {
             Alert alertConferma = new Alert(Alert.AlertType.CONFIRMATION);
@@ -87,10 +84,8 @@ public class MenuPrincipaleController {
         try {
             Parent root = loader.load();
             GiocoController giocoController = loader.getController();
-
             // Passiamo sia il DTO che lo stato logico reale delle Entity
             giocoController.inizializzaInterfaccia(partita, statoReale);
-
             Stage stageCorrente = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stageCorrente.setScene(new Scene(root));
         } catch (IOException e) {

@@ -29,48 +29,49 @@ public class SceltaClasseController {
     private final String pathSalvataggio = "salvataggi/salvataggio.json";
     private final ConvertitorePartita convertitorePartita = new ConvertitorePartita();
 
-    @FXML
-    public void handleSceltaClasse(ActionEvent event) {
-        Button bottonePremuto = (Button) event.getSource();
-        String classeScelta = "";
-
-        if (bottonePremuto == btnArciere) {
-            classeScelta = "Arciere";
-        } else if (bottonePremuto == btnCavaliere) {
-            classeScelta = "Cavaliere";
-        } else if (bottonePremuto == btnLanciere) {
-            classeScelta = "Lanciere";
-        }
-
-        System.out.println("Configuro partita logica per: " + classeScelta);
-
+    private void avviaNuovaPartita(String classeScelta, Button bottoneSorgente) {
         try {
             // 1. Inizializziamo il dominio logico e creiamo il primo auto-salvataggio tramite il convertitore dedicato
             StatoGiocoLocale statoReale = convertitorePartita.inizializzaNuovaPartita(classeScelta, pathSalvataggio);
-
             // 2. Proiettiamo lo stato reale appena generato in una struttura DTO per la visualizzazione immediata della GUI
             GiocatoreDTO giocatoreDTO = new GiocatoreDTO(statoReale.giocatore());
             List<StanzaDTO> stanzeDTO = statoReale.mappaStanze().values().stream()
                     .map(StanzaDTO::new)
                     .toList();
             int idStanzaIniziale = statoReale.giocatore().getStanzaCorrente().getIdStanza();
-
             SalvataggioDTO nuovaPartitaDTO = new SalvataggioDTO(giocatoreDTO, stanzeDTO, idStanzaIniziale);
-
             // 3. Eseguiamo il passaggio controllato alla schermata di gioco principale
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/schermata_gioco.fxml"));
             Parent root = loader.load();
-
             GiocoController giocoController = loader.getController();
             // Passiamo la coppia strutturata (DTO + Entity)
             giocoController.inizializzaInterfaccia(nuovaPartitaDTO, statoReale);
-
-            Stage stageCorrente = (Stage) bottonePremuto.getScene().getWindow();
+            Stage stageCorrente = (Stage) bottoneSorgente.getScene().getWindow();
             stageCorrente.setScene(new Scene(root));
-
-        } catch (IOException e) {
+        }catch (IOException e){
             System.err.println("Errore nel caricamento di schermata_gioco.fxml o inizializzazione della partita");
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void initialize() {
+        lblStatisticheArciere.setText("Arciere - Vita: 50 | Attacco: 10 | Scudo: 1");
+        lblStatisticheCavaliere.setText("Cavaliere - Vita: 70 | Attacco: 20 | Scudo: 3");
+        lblStatisticheLanciere.setText("Lanciere - Vita: 60 | Attacco: 15 | Scudo: 2");
+    }
+
+    @FXML
+    public void handleSceltaClasse(ActionEvent event) {
+        Button bottonePremuto = (Button) event.getSource();
+        String idBottone = bottonePremuto.getId();
+        String classeScelta = switch (idBottone) {
+            case "btnArciere" -> "Arciere";
+            case "btnCavaliere" -> "Cavaliere";
+            case "btnLanciere" -> "Lanciere";
+            default -> throw new IllegalArgumentException("Bottone non riconosciuto: " + idBottone);
+        };
+        System.out.println("Configuro partita logica per: " + classeScelta);
+        avviaNuovaPartita(classeScelta, bottonePremuto);
     }
 }
