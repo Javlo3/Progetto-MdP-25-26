@@ -12,9 +12,11 @@ public abstract class Giocatore extends EntitaGenerale{
 
     private StanzaGenerica stanzaCorrente;
     private final List<Artefatto> inventario = new ArrayList<>();
+    private final int puntiAttaccoBase;
 
     public Giocatore(int vitaMassima, int puntiVita, int puntiAttacco, int puntiScudo) {
         super(vitaMassima, puntiVita, puntiAttacco, puntiScudo);
+        this.puntiAttaccoBase = puntiAttacco;
     }
 
     public StanzaGenerica getStanzaCorrente() {
@@ -42,5 +44,13 @@ public abstract class Giocatore extends EntitaGenerale{
 
     public List<Artefatto> getInventario() {
         return Collections.unmodifiableList(this.inventario);
+    }
+
+    public int getPuntiAttaccoBase() {
+        return this.puntiAttaccoBase;
+    }
+
+    public void resetPuntiAttaccoBase() {
+        this.puntiAttacco = this.puntiAttaccoBase;
     }
 }
