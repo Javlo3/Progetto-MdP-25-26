@@ -3,7 +3,7 @@ plugins {
     id("application")
 }
 
-group = "org.progetto"
+group = "it.unicam.cs.mpgc"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -11,7 +11,7 @@ repositories {
 }
 
 application {
-    mainClass.set("org.progetto.Main")
+    mainClass.set("it.unicam.cs.mpgc.rpg125585.Main")
 }
 
 dependencies {
