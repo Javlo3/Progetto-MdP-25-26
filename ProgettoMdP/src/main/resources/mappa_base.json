@@ -4,22 +4,26 @@
     "tipo" : "StanzaCorridoio",
     "nomeStanza" : "Atrio del Castello",
     "descrizioneStanza" : "Entrata del castello illuminata solo da delle torce",
-    "idNord" : 1, "idSud" : -1, "idEst" : -1, "idOvest" : -1
+    "idStanzaNord" : 1, "idStanzaSud" : -1, "idStanzaEst" : -1, "idStanzaOvest" : -1,
+    "isStanzaLoot": false,
+    "isStanzaCombattimento": false
   },
   {
     "idStanza" : 1,
     "tipo" : "StanzaCombattimento",
     "nomeStanza" : "Sala Comune",
     "descrizioneStanza" : "Stanza con un tavolo nel mezzo e due Goblin semplici",
-    "idNord" : 3, "idSud" : 0, "idEst" : 4, "idOvest" : 2,
-    "nemiciContenuti" : [
+    "idStanzaNord" : 3, "idStanzaSud" : 0, "idStanzaEst" : 4, "idStanzaOvest" : 2,
+    "isStanzaLoot": false,
+    "isStanzaCombattimento": true,
+    "nemiciNellaStanza" : [
       {
         "tipoNemico" : "GoblinSemplice",
         "nomeNemico" : "Grith",
         "vitaMassima" : 60,
         "puntiVita" : 60,
         "puntiAttacco" : 10,
-        "puntiScudo" : 3
+        "puntiScudo" : 2
       },
       {
         "tipoNemico" : "GoblinSemplice",
@@ -27,7 +31,7 @@
         "vitaMassima" : 60,
         "puntiVita" : 60,
         "puntiAttacco" : 10,
-        "puntiScudo" : 3
+        "puntiScudo" : 2
       }
     ]
   },
@@ -36,15 +40,17 @@
     "tipo" : "StanzaCombattimento",
     "nomeStanza" : "Caserma Sgretolata",
     "descrizioneStanza" : "Rottami di ferro e barili sfondati ingombrano il pavimento. Tra l'odore di muffa spicca quello delle torce di grasso usate dai goblin",
-    "idNord" : -1, "idSud" : -1, "idEst" : 1, "idOvest" : -1,
-    "nemiciContenuti" : [
+    "idStanzaNord" : -1, "idStanzaSud" : -1, "idStanzaEst" : 1, "idStanzaOvest" : -1,
+    "isStanzaLoot": false,
+    "isStanzaCombattimento": true,
+    "nemiciNellaStanza" : [
       {
         "tipoNemico" : "GoblinSemplice",
         "nomeNemico" : "Zuldik",
         "vitaMassima" : 60,
         "puntiVita" : 60,
         "puntiAttacco" : 10,
-        "puntiScudo" : 3
+        "puntiScudo" : 2
       },
       {
         "tipoNemico" : "GoblinLanciere",
@@ -52,7 +58,7 @@
         "vitaMassima" : 50,
         "puntiVita" : 50,
         "puntiAttacco" : 15,
-        "puntiScudo" : 3
+        "puntiScudo" : 2
       }
     ]
   },
@@ -61,28 +67,34 @@
     "tipo" : "StanzaLoot",
     "nomeStanza" : "Stanza di Cura",
     "descrizioneStanza" : "Una stanza insolitamente silenziosa. Al centro, una piccola fontana di pietra incastonata nel muro fa sgorgare acqua limpida, un'oasi di relativa quiete rispetto all'orrore del castello",
-    "idNord" : 5, "idSud" : 1, "idEst" : -1, "idOvest" : -1,
-    "Artefatto" : {
+    "idStanzaNord" : 5, "idStanzaSud" : 1, "idStanzaEst" : -1, "idStanzaOvest" : -1,
+    "isStanzaLoot": true,
+    "isStanzaCombattimento": false,
+    "artefattiNellaStanza" : [
+      {
       "tipoArtefatto" : "Cura",
       "nomeArtefatto" : "Crisalide d'Aria",
-      "descrizioneArtefatto" : "",
+      "descrizioneArtefatto" : "Permette a chi la assume di curare 20 punti vita",
       "puntiCura" : 20
     }
+    ]
   },
   {
     "idStanza" : 4,
     "tipo" : "StanzaCombattimento",
     "nomeStanza" : "Postazione di Guardia",
     "descrizioneStanza" : "I pilastri di pietra di questa stanza sono scheggiati da profondi colpi d'arma. I goblin hanno improvvisato delle barricate con vecchi mobili del castello",
-    "idNord" : -1, "idSud" : -1, "idEst" : -1, "idOvest" : 1,
-    "nemiciContenuti" : [
+    "idStanzaNord" : -1, "idStanzaSud" : -1, "idStanzaEst" : -1, "idStanzaOvest" : 1,
+    "isStanzaLoot": false,
+    "isStanzaCombattimento": true,
+    "nemiciNellaStanza" : [
       {
         "tipoNemico" : "GoblinLanciere",
         "nomeNemico" : "Vat",
         "vitaMassima" : 50,
         "puntiVita" : 50,
         "puntiAttacco" : 15,
-        "puntiScudo" : 3
+        "puntiScudo" : 2
       },
       {
         "tipoNemico" : "GoblinLanciere",
@@ -90,7 +102,7 @@
         "vitaMassima" : 50,
         "puntiVita" : 50,
         "puntiAttacco" : 15,
-        "puntiScudo" : 3
+        "puntiScudo" : 2
       }
     ]
   },
@@ -99,28 +111,34 @@
     "tipo" : "StanzaLoot",
     "nomeStanza" : "Altare del Crepuscolo",
     "descrizioneStanza" : "Al centro della stanza, l'oscurità è spezzata da un braciere di fiamme azzurre che fluttuano senza bruciare legna, proiettando ombre sinistre sulla spada Bashil posizionata sopra un piedistallo di pietra nera",
-    "idNord" : 6, "idSud" : 3, "idEst" : -1, "idOvest" : -1,
-    "Artefatto" : {
+    "idStanzaNord" : 6, "idStanzaSud" : 3, "idStanzaEst" : -1, "idStanzaOvest" : -1,
+    "isStanzaLoot": true,
+    "isStanzaCombattimento": false,
+    "artefattiNellaStanza" : [
+      {
       "tipoArtefatto" : "Arma",
       "nomeArtefatto" : "Bashil",
       "descrizioneArtefatto" : "Quest'arma dà 5 punti attacco in più al personaggio che la maneggia",
       "dannoArma" : 5
     }
+    ]
   },
   {
     "idStanza" : 6,
     "tipo" : "StanzaCombattimento",
     "nomeStanza" : "Laboratorio Arcano",
     "descrizioneStanza" : "L'aria è pesante e satura di fumo violaceo. Tavoli pieni di pergamene bruciate e ampolle alchemiche circondano un cerchio rituale tracciato sul pavimento",
-    "idNord" : 7, "idSud" : 5, "idEst" : -1, "idOvest" : -1,
-    "nemiciContenuti" : [
+    "idStanzaNord" : 7, "idStanzaSud" : 5, "idStanzaEst" : -1, "idStanzaOvest" : -1,
+    "isStanzaLoot": false,
+    "isStanzaCombattimento": true,
+    "nemiciNellaStanza" : [
       {
         "tipoNemico" : "Stregone",
         "nomeNemico" : "Gem Gludrig",
         "vitaMassima" : 55,
         "puntiVita" : 55,
         "puntiAttacco" : 20,
-        "puntiScudo" : 2
+        "puntiScudo" : 1
       },
       {
         "tipoNemico" : "Stregone",
@@ -128,7 +146,7 @@
         "vitaMassima" : 55,
         "puntiVita" : 55,
         "puntiAttacco" : 20,
-        "puntiScudo" : 2
+        "puntiScudo" : 1
       }
     ]
   },
@@ -137,6 +155,6 @@
     "tipo" : "StanzaCombattimento",
     "nomeStanza" : "Fine Demo",
     "descrizioneStanza" : "La Demo è terminata",
-    "idNord" : -1, "idSud" : 6, "idEst" : -1, "idOvest" : -1
+    "idStanzaNord" : -1, "idStanzaSud" : 6, "idStanzaEst" : -1, "idStanzaOvest" : -1
   }
 ]
