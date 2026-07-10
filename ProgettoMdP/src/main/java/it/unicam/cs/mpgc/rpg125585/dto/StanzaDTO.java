@@ -2,7 +2,6 @@ package it.unicam.cs.mpgc.rpg125585.dto;
 
 import it.unicam.cs.mpgc.rpg125585.backend.mappa.stanze.*;
 
-import java.util.Collections;
 import java.util.List;
 
 public class StanzaDTO {
