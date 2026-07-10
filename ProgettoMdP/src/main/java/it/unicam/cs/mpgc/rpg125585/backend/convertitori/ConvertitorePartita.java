@@ -13,13 +13,11 @@ public class ConvertitorePartita {
     private final ConvertitoreMappa convertitoreMappa = new ConvertitoreMappa();
 
     /**
-
      * SCENARIO 1: Nuova Partita (Mappa Base dalle risorse + Salvataggio Automatico)
-
      */
     public StatoGiocoLocale inizializzaNuovaPartita(String classeScelta, String percorsoSalvataggio) {
         // 1. Legge i DTO della mappa vergine immodificabile dalle risorse interne
-        List<StanzaDTO> mappaBaseDto = gestoreFile.caricaMappaBase("mappabase.json");
+        List<StanzaDTO> mappaBaseDto = gestoreFile.caricaMappaBase("mappa_base.json");
         if(mappaBaseDto == null){
             throw new IllegalStateException("Impossibile caricare la mappa base dalle risorse");
         }
@@ -27,8 +25,8 @@ public class ConvertitorePartita {
         Map<Integer, StanzaGenerica> stanzeReali = convertitoreMappa.mappaDaDtoADominio(mappaBaseDto);
         // 3. Genera un eroe fresco di zecca tramite Factory polimorfica
         Giocatore eroeReale = istanziaNuovoEroe(classeScelta);
-        // 4. Posiziona l'eroe nella stanza iniziale (assumiamo ID 1)
-        StanzaGenerica stanzaIniziale = stanzeReali.get(1);
+        // 4. Posiziona l'eroe nella stanza iniziale (ID 0)
+        StanzaGenerica stanzaIniziale = stanzeReali.get(0);
         if(stanzaIniziale == null){
             stanzaIniziale = stanzeReali.values().iterator().next();
         }
@@ -47,7 +45,7 @@ public class ConvertitorePartita {
         if (salvataggioDTO == null) {
             throw new IllegalStateException("Nessun salvataggio trovato al percorso: " + percorsoSalvataggio);
         }
-        // 1. Ricostruisce la mappa modificata
+        // 1. Ricostruisce la mappa modificata basandosi sui flag booleani corretti
         Map<Integer, StanzaGenerica> stanzeReali = convertitoreMappa.mappaDaDtoADominio(salvataggioDTO.getMappaStanze());
         // 2. Ricostruisce l'eroe con le sue vecchie statistiche
         Giocatore eroeReale = ricostruisciEroeDaDto(salvataggioDTO.getGiocatore());
@@ -69,23 +67,29 @@ public class ConvertitorePartita {
         gestoreFile.salvaPartita(percorsoSalvataggio, salvataggioDTO);
     }
 
+    /**
+     * Costruisce il DTO di salvataggio assicurandosi di mappare lo stato polimorfico
+     * reale di ogni stanza (mantenendo i flag isStanzaLoot/isStanzaCombattimento intatti).
+     */
     private SalvataggioDTO creaSalvataggioDati(Giocatore eroe, Map<Integer, StanzaGenerica> mappaCompleta) {
         GiocatoreDTO giocatoreDTO = new GiocatoreDTO(eroe);
-        List<StanzaDTO> stanzeDTO = convertitoreMappa.mappaADominioDto(mappaCompleta);
+        // Mappatura sicura sfruttando lo switch pattern matching interno al costruttore di StanzaDTO
+        List<StanzaDTO> stanzeDTO = mappaCompleta.values().stream()
+                .map(StanzaDTO::new)
+                .toList();
         int idStanzaAttuale = eroe.getStanzaCorrente().getIdStanza();
         return new SalvataggioDTO(giocatoreDTO, stanzeDTO, idStanzaAttuale);
     }
 
     private Giocatore istanziaNuovoEroe(String classeScelta) {
         return switch (classeScelta) {
-            case "Cavaliere" -> new Cavaliere(70, 70, 15, 3);
-            case "Arciere" -> new Arciere(50, 50, 15, 1);
-            case "Lanciere" -> new Lanciere(55, 50, 15, 2);
+            case "Cavaliere" -> new Cavaliere(100, 100, 30, 3);
+            case "Arciere" -> new Arciere(90, 90, 20, 2);
+            case "Lanciere" -> new Lanciere(95, 95, 25, 2);
             default -> throw new IllegalArgumentException("Classe non valida: " + classeScelta);
-
         };
-
     }
+
     private Giocatore ricostruisciEroeDaDto(GiocatoreDTO dto) {
         return switch (dto.getTipoClasse()) {
             case "Cavaliere" -> new Cavaliere(dto.getVitaMassima(), dto.getPuntiVita(), dto.getPuntiAttacco(),
