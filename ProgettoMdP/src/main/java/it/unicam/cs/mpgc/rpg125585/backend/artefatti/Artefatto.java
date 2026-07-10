@@ -1,5 +1,7 @@
 package it.unicam.cs.mpgc.rpg125585.backend.artefatti;
 
+import it.unicam.cs.mpgc.rpg125585.backend.entita.giocatore.Giocatore;
+
 public abstract class Artefatto {
     private final String nomeArtefatto;
     private final String descrizioneArtefatto;
@@ -17,4 +19,5 @@ public abstract class Artefatto {
         return descrizioneArtefatto;
     }
 
+    public abstract void applicaEffetto(Giocatore giocatore);
 }

@@ -14,11 +14,9 @@ public class Cura extends Artefatto{
         return puntiCura;
     }
 
-    public boolean usaCura(Giocatore bersaglio) {
-        if (bersaglio.getPuntiVita() < bersaglio.getVitaMassima()) {
-            bersaglio.curaRicevuta(this.puntiCura); // Diciamo all'oggetto cosa fare!
-            return true;
-        }
-        return false;
+    public void applicaEffetto(Giocatore giocatore) {
+        int nuovaVita = Math.min(giocatore.getVitaMassima(), giocatore.getPuntiVita() + this.puntiCura);
+        giocatore.setPuntiVita(nuovaVita);
+        System.out.println(getNomeArtefatto() + " consumata! Vita attuale: " + giocatore.getPuntiVita());
     }
 }
