@@ -3,6 +3,8 @@ package it.unicam.cs.mpgc.rpg125585.backend.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import it.unicam.cs.mpgc.rpg125585.backend.artefatti.Artefatto;
+import it.unicam.cs.mpgc.rpg125585.backend.convertitori.ArtefattoDeserializer;
 import it.unicam.cs.mpgc.rpg125585.dto.StanzaDTO;
 import it.unicam.cs.mpgc.rpg125585.dto.SalvataggioDTO;
 
@@ -15,9 +17,13 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class GestoreFile {
-    private final Gson gson = new Gson();
-    private final Gson gsonPretty = new GsonBuilder().setPrettyPrinting().create();
-
+    private final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(Artefatto.class, new ArtefattoDeserializer())
+            .create();
+    private final Gson gsonPretty = new GsonBuilder()
+            .registerTypeAdapter(Artefatto.class, new ArtefattoDeserializer())
+            .setPrettyPrinting()
+            .create();
     // 1. Legge mappabase.json e sputa fuori la lista di moduli DTO
     public List<StanzaDTO> caricaMappaBase(String nomeFileNelleRisorse) {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(nomeFileNelleRisorse)) {
@@ -35,7 +41,6 @@ public class GestoreFile {
             return null;
         }
     }
-
     // 2. Legge salvataggio.json e sputa fuori il modulo del salvataggio
     public SalvataggioDTO caricaPartitaSalvata(String percorsoFile) {
         Path path = Paths.get(percorsoFile);
@@ -49,7 +54,6 @@ public class GestoreFile {
             return null;
         }
     }
-
     // 3. Prende un modulo di salvataggio pieno e lo scrive su salvataggio.json
     public void salvaPartita(String percorsoFile, SalvataggioDTO datiSalvataggio) {
         Path path = Paths.get(percorsoFile);
