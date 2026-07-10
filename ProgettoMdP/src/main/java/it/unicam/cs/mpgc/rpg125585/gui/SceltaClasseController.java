@@ -19,12 +19,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class SceltaClasseController {
-    @FXML private Button btnArciere;
-    @FXML private Button btnCavaliere;
-    @FXML private Button btnLanciere;
-    @FXML private Label lblStatisticheArciere;
-    @FXML private Label lblStatisticheCavaliere;
-    @FXML private Label lblStatisticheLanciere;
+    @FXML private Button btnArciere, btnCavaliere, btnLanciere;
+    @FXML private Label lblStatisticheArciere, lblStatisticheCavaliere, lblStatisticheLanciere;
 
     private final String pathSalvataggio = "salvataggi/salvataggio.json";
     private final ConvertitorePartita convertitorePartita = new ConvertitorePartita();
@@ -56,9 +52,9 @@ public class SceltaClasseController {
 
     @FXML
     private void initialize() {
-        lblStatisticheArciere.setText("Arciere - Vita: 50 | Attacco: 10 | Scudo: 1");
-        lblStatisticheCavaliere.setText("Cavaliere - Vita: 70 | Attacco: 20 | Scudo: 3");
-        lblStatisticheLanciere.setText("Lanciere - Vita: 60 | Attacco: 15 | Scudo: 2");
+        lblStatisticheArciere.setText("Arciere - Vita: 90 | Attacco: 30 | Scudo: 2");
+        lblStatisticheCavaliere.setText("Cavaliere - Vita: 100 | Attacco: 20 | Scudo: 3");
+        lblStatisticheLanciere.setText("Lanciere - Vita: 95 | Attacco: 25 | Scudo: 2");
     }
 
     @FXML

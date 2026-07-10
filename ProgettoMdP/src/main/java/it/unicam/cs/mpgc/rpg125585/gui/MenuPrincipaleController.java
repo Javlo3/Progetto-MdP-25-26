@@ -5,6 +5,7 @@ import it.unicam.cs.mpgc.rpg125585.backend.convertitori.StatoGiocoLocale;
 import it.unicam.cs.mpgc.rpg125585.backend.utils.GestoreFile;
 import it.unicam.cs.mpgc.rpg125585.dto.SalvataggioDTO;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,26 +27,26 @@ public class MenuPrincipaleController {
     @FXML
     public void handleCaricaPartita(ActionEvent event) {
         if (!gestoreFile.esisteSalvataggio(pathSalvataggio)) {
-            mostraAllertaErrore("Nessun salvataggio trovato", "Non ci sono partite salvate. Inizia una nuova avventura!");
+            mostraAllertaErrore("Nessun salvataggio trovato", "Non ci sono partite salvate. " +
+                    "Inizia una nuova avventura!");
         } else {
             System.out.println("Caricamento partita in corso...");
-
             try {
                 // 1. Ricostruiamo lo stato logico reale del backend (Entità) dal file esterno
                 StatoGiocoLocale statoReale = convertitorePartita.caricaPartitaEsistente(pathSalvataggio);
-
                 // 2. Leggiamo il DTO leggero per riempire l'interfaccia grafica
                 SalvataggioDTO partitaCaricata = gestoreFile.caricaPartitaSalvata(pathSalvataggio);
-
                 if (partitaCaricata != null && statoReale != null) {
                     cambiaSchermataGioco(event, partitaCaricata, statoReale);
                 } else {
-                    mostraAllertaErrore("Errore di Caricamento", "Il file di salvataggio è corrotto o illeggibile.");
+                    mostraAllertaErrore("Errore di Caricamento", "Il file di salvataggio è" +
+                            " corrotto o illeggibile.");
                 }
             } catch (Exception e) {
                 System.err.println("Errore durante il ripristino dei dati di gioco logici");
                 e.printStackTrace();
-                mostraAllertaErrore("Errore di Caricamento", "Impossibile ricostruire lo stato della partita.");
+                mostraAllertaErrore("Errore di Caricamento", "Impossibile ricostruire" +
+                        " lo stato della partita.");
             }
         }
     }
@@ -56,8 +57,8 @@ public class MenuPrincipaleController {
             Alert alertConferma = new Alert(Alert.AlertType.CONFIRMATION);
             alertConferma.setTitle("Attenzione: Salvataggio già esistente");
             alertConferma.setHeaderText("C'è già una partita salvata");
-            alertConferma.setContentText("Se ne inizi una nuova, quest'ultima sovrascriverà il salvataggio precedente. Sei sicuro di voler continuare?");
-
+            alertConferma.setContentText("Se ne inizi una nuova, quest'ultima sovrascriverà il salvataggio precedente." +
+                    " Sei sicuro di voler continuare?");
             Optional<ButtonType> risultato = alertConferma.showAndWait();
             if (risultato.isPresent() && risultato.get() == ButtonType.OK) {
                 cambiaSchermata(event);
@@ -102,3 +103,4 @@ public class MenuPrincipaleController {
         alert.showAndWait();
     }
 }
+

@@ -10,7 +10,7 @@ public class InterfacciaGrafica extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menu_principale.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/schermata_menu_principale.fxml"));
         Parent root = loader.load();
 
         stage.setTitle("MdP RPG Game");
