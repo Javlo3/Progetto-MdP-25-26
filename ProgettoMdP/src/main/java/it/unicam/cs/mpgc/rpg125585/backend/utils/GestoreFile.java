@@ -24,6 +24,7 @@ public class GestoreFile {
             .registerTypeAdapter(Artefatto.class, new ArtefattoDeserializer())
             .setPrettyPrinting()
             .create();
+
     // 1. Legge mappabase.json e sputa fuori la lista di moduli DTO
     public List<StanzaDTO> caricaMappaBase(String nomeFileNelleRisorse) {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(nomeFileNelleRisorse)) {
@@ -32,15 +33,14 @@ public class GestoreFile {
                 return null;
             }
             try (InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
-                Type tipoLista = new TypeToken<List<StanzaDTO>>() {
-                }.getType();
+                Type tipoLista = new TypeToken<List<StanzaDTO>>() {}.getType();
                 return gson.fromJson(reader, tipoLista);
             }
         } catch (IOException e) {
-            System.err.println("Errore nel caricamento delle risorse: " + e.getMessage());
-            return null;
+            throw  new RuntimeException("Errore nel caricamento delle risorse di gioco", e);
         }
     }
+
     // 2. Legge salvataggio.json e sputa fuori il modulo del salvataggio
     public SalvataggioDTO caricaPartitaSalvata(String percorsoFile) {
         Path path = Paths.get(percorsoFile);
@@ -50,25 +50,28 @@ public class GestoreFile {
         try (FileReader reader = new FileReader(path.toFile())) {
             return gson.fromJson(reader, SalvataggioDTO.class);
         } catch (IOException e) {
-            System.err.println("Errore nel caricamento del salvataggio: " + e.getMessage());
-            return null;
+            throw new RuntimeException("Errore nel caricamento del salvataggio" + e);
         }
     }
+
     // 3. Prende un modulo di salvataggio pieno e lo scrive su salvataggio.json
     public void salvaPartita(String percorsoFile, SalvataggioDTO datiSalvataggio) {
         Path path = Paths.get(percorsoFile);
+        controllaEsistenzaCartella(path);
+        try (FileWriter writer = new FileWriter(path.toFile())) {
+            gsonPretty.toJson(datiSalvataggio, writer);
+        } catch (IOException e) {
+            throw new RuntimeException("Errore critico durante il salvataggio della partita", e);
+        }
+    }
+
+    private void controllaEsistenzaCartella(Path path) {
         if(path.getParent() != null) {
             try {
                 Files.createDirectories(path.getParent());
             } catch (IOException e) {
-                System.err.println("Impossibile creare la cartella di salvataggio: " + e.getMessage());
-                return;
+                throw new RuntimeException("Impossibile creare la cartella di destinazione", e);
             }
-        }
-        try (FileWriter writer = new FileWriter(path.toFile())) {
-            gsonPretty.toJson(datiSalvataggio, writer);
-        } catch (IOException e) {
-            System.err.println("Errore durante il salvataggio della partita: " + e.getMessage());
         }
     }
 
