@@ -38,15 +38,4 @@ public abstract class EntitaGenerale {
         return puntiScudo;
     }
 
-    /**
-     * Incrementa i punti vita attuali senza mai superare la vita massima.
-     */
-    public void curaRicevuta(int puntiCura) {
-        if (puntiCura < 0) return; // Protezione da valori assurdi
-
-        this.puntiVita += puntiCura;
-        if (this.puntiVita > this.vitaMassima) {
-            this.puntiVita = this.vitaMassima;
-        }
-    }
 }
