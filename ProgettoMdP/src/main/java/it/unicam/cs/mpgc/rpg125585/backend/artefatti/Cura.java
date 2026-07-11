@@ -15,8 +15,8 @@ public class Cura extends Artefatto{
     }
 
     public void applicaEffetto(Giocatore giocatore) {
+        // Garantisce che la cura non superi mai il tetto massimo della vita del personaggio
         int nuovaVita = Math.min(giocatore.getVitaMassima(), giocatore.getPuntiVita() + this.puntiCura);
         giocatore.setPuntiVita(nuovaVita);
-        System.out.println(getNomeArtefatto() + " consumata! Vita attuale: " + giocatore.getPuntiVita());
     }
 }

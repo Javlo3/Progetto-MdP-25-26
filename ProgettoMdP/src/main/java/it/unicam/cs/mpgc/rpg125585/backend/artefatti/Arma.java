@@ -16,15 +16,13 @@ public class Arma extends Artefatto{
     }
 
     public void equipaggiaA(Giocatore giocatore) {
-        giocatore.aumentaAttaccoDaArma(this.dannoArma); // L'incapsulamento è salvo
+        giocatore.aumentaAttaccoDaArma(this.dannoArma);
     }
 
     public void applicaEffetto(Giocatore giocatore) {
+        // Ripristina l'attacco standard prima di sommare il bonus della nuova arma equipaggiata
         giocatore.resetPuntiAttaccoBase();
-        // Aggiunge il danno di questa specifica arma
-        giocatore.aumentaAttaccoDaArma(this.dannoArma);
-        // Finisce nell'inventario
+        equipaggiaA(giocatore);
         giocatore.aggiungiAllInventario(this);
-        System.out.println("Equipaggiata arma: " + getNomeArtefatto() + "! Attacco: " + giocatore.getPuntiAttacco());
     }
 }
