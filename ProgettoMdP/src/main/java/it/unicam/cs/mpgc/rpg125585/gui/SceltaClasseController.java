@@ -25,12 +25,7 @@ public class SceltaClasseController {
     private final String pathSalvataggio = "salvataggi/salvataggio.json";
     private final ConvertitorePartita convertitorePartita = new ConvertitorePartita();
 
-    @FXML
-    private void initialize() {
-        lblStatisticheArciere.setText("Arciere - Vita: 90 | Attacco: 30 | Scudo: 2");
-        lblStatisticheCavaliere.setText("Cavaliere - Vita: 100 | Attacco: 20 | Scudo: 3");
-        lblStatisticheLanciere.setText("Lanciere - Vita: 95 | Attacco: 25 | Scudo: 2");
-    }
+    // Handler FXML, gestione dei click sui pulsanti della GUI
 
     @FXML
     public void handleSceltaClasse(ActionEvent event) {
@@ -39,23 +34,13 @@ public class SceltaClasseController {
         avviaNuovaPartita(classeScelta, bottonePremuto);
     }
 
-    private SalvataggioDTO creaSalvataggioDTO(StatoGiocoLocale stato) {
-        GiocatoreDTO giocatoreDTO = new GiocatoreDTO(stato.giocatore());
-        List<StanzaDTO> stanzeDTO = stato.mappaStanze().values().stream()
-                .map(StanzaDTO::new)
-                .toList();
-        int idStanzaIniziale = stato.giocatore().getStanzaCorrente().getIdStanza();
-        return new SalvataggioDTO(giocatoreDTO, stanzeDTO, idStanzaIniziale);
-    }
+    // Setup e metodi utili per lo stato
 
-    private void cambiaSchermataGioco(Button bottone, SalvataggioDTO salvataggioDTO, StatoGiocoLocale stato)
-    throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/schermata_gioco.fxml"));
-        Parent root = loader.load();
-        GiocoController giocoController = loader.getController();
-        giocoController.inizializzaInterfaccia(salvataggioDTO, stato);
-        Stage stageCorrente = (Stage) bottone.getScene().getWindow();
-        stageCorrente.setScene(new Scene(root));
+    @FXML
+    private void initialize() {
+        lblStatisticheArciere.setText("Arciere - Vita: 90 | Attacco: 30 | Scudo: 2");
+        lblStatisticheCavaliere.setText("Cavaliere - Vita: 100 | Attacco: 20 | Scudo: 3");
+        lblStatisticheLanciere.setText("Lanciere - Vita: 95 | Attacco: 25 | Scudo: 2");
     }
 
     private void avviaNuovaPartita(String classeScelta, Button bottoneSorgente) {
@@ -68,12 +53,13 @@ public class SceltaClasseController {
         }
     }
 
-    private void mostraFinestraErroreGrave(String titolo, String messaggio) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-        alert.setTitle(titolo);
-        alert.setHeaderText(null);
-        alert.setContentText(messaggio);
-        alert.showAndWait();
+    private SalvataggioDTO creaSalvataggioDTO(StatoGiocoLocale stato) {
+        GiocatoreDTO giocatoreDTO = new GiocatoreDTO(stato.giocatore());
+        List<StanzaDTO> stanzeDTO = stato.mappaStanze().values().stream()
+                .map(StanzaDTO::new)
+                .toList();
+        int idStanzaIniziale = stato.giocatore().getStanzaCorrente().getIdStanza();
+        return new SalvataggioDTO(giocatoreDTO, stanzeDTO, idStanzaIniziale);
     }
 
     private String determinaClasse(String idBottone) {
@@ -85,4 +71,23 @@ public class SceltaClasseController {
         };
     }
 
+    // Gestione del cambio della schermata verso le pagine successive
+
+    private void cambiaSchermataGioco(Button bottone, SalvataggioDTO salvataggioDTO, StatoGiocoLocale stato)
+    throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/schermata_gioco.fxml"));
+        Parent root = loader.load();
+        GiocoController giocoController = loader.getController();
+        giocoController.inizializzaInterfaccia(salvataggioDTO, stato);
+        Stage stageCorrente = (Stage) bottone.getScene().getWindow();
+        stageCorrente.setScene(new Scene(root));
+    }
+
+    private void mostraFinestraErroreGrave(String titolo, String messaggio) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+        alert.setTitle(titolo);
+        alert.setHeaderText(null);
+        alert.setContentText(messaggio);
+        alert.showAndWait();
+    }
 }

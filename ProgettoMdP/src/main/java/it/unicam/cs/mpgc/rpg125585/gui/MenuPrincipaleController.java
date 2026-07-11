@@ -9,6 +9,7 @@ import it.unicam.cs.mpgc.rpg125585.dto.SalvataggioDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -24,13 +25,14 @@ public class MenuPrincipaleController {
     private final GestoreFile gestoreFile = new GestoreFile();
     private final ConvertitorePartita convertitorePartita = new ConvertitorePartita();
 
+    // Handler FXML, gestione dei click sui pulsanti della GUI
+
     @FXML
     public void handleCaricaPartita(ActionEvent event) {
         if (!gestoreFile.esisteSalvataggio(pathSalvataggio)) {
             mostraAllertaErrore("Nessun salvataggio trovato", "Non ci sono partite salvate. " +
                     "Inizia una nuova avventura!");
         } else {
-            System.out.println("Caricamento partita in corso...");
             try {
                 // 1. Ricostruiamo lo stato logico reale del backend (Entità) dal file esterno
                 StatoGiocoLocale statoReale = convertitorePartita.caricaPartitaEsistente(pathSalvataggio);
@@ -43,8 +45,6 @@ public class MenuPrincipaleController {
                             " corrotto o illeggibile.");
                 }
             } catch (Exception e) {
-                System.err.println("Errore durante il ripristino dei dati di gioco logici");
-                e.printStackTrace();
                 mostraAllertaErrore("Errore di Caricamento", "Impossibile ricostruire" +
                         " lo stato della partita.");
             }
@@ -68,17 +68,7 @@ public class MenuPrincipaleController {
         }
     }
 
-    private void cambiaSchermata(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/schermata_scelta_classe.fxml"));
-            Parent root = loader.load();
-            Button sorgente = (Button) event.getSource();
-            Stage stageCorrente = (Stage) sorgente.getScene().getWindow();
-            stageCorrente.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // Gestione del cambio della schermata verso le pagine successive
 
     private void cambiaSchermataGioco(ActionEvent event, SalvataggioDTO partita, StatoGiocoLocale statoReale) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/schermata_gioco.fxml"));
@@ -90,8 +80,19 @@ public class MenuPrincipaleController {
             Stage stageCorrente = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stageCorrente.setScene(new Scene(root));
         } catch (IOException e) {
-            System.err.println("Errore nel caricamento di schermata_gioco.fxml");
-            e.printStackTrace();
+            mostraAllertaErrore("Errore Critico", "Impossibile passare alla schermata di gioco");
+        }
+    }
+
+    private void cambiaSchermata(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/schermata_scelta_classe.fxml"));
+        try {
+            Parent root = loader.load();
+            Stage stageCorrente = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stageCorrente.setScene(new Scene(root));
+        } catch (IOException e) {
+            mostraAllertaErrore("Errore Critico", "Impossibile caricare la schermata di selezione " +
+                    "della classe.");
         }
     }
 
