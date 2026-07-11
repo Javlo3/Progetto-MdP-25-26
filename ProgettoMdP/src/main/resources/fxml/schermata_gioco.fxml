@@ -85,8 +85,8 @@
          </padding>
          <Label fx:id="lblNomeNemico" text="Nome Nemico" textFill="WHITE" VBox.vgrow="ALWAYS" />
          <Label fx:id="lblVitaNemico" text="Vita Nemico" textFill="WHITE" VBox.vgrow="ALWAYS" />
-         <Label fx:id="lblScudoNemico" text="Scudo Nemico" textFill="WHITE" VBox.vgrow="ALWAYS" />
          <Label fx:id="lblAttaccoNemico" text="Attacco Nemico" textFill="WHITE" VBox.vgrow="ALWAYS" />
+         <Label fx:id="lblScudoNemico" text="Scudo Nemico" textFill="WHITE" VBox.vgrow="ALWAYS" />
       </VBox>
    </right>
 </BorderPane>
