@@ -25,12 +25,4 @@ public class StanzaCombattimento extends StanzaGenerica {
         }
     }
 
-    public boolean haNemiciVivi() {
-        for (Nemico nemico : nemiciStanza) {
-            if(nemico.getPuntiVita() > 0 ) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
