@@ -5,6 +5,9 @@ public abstract class EntitaGenerale {
     private final int vitaMassima;
     private final int puntiScudo;
     private int puntiVita;
+
+    // Accessibile direttamente dalle sottoclassi grazie al modificatore protected
+    
     protected int puntiAttacco;
 
     public EntitaGenerale(int vitaMassima, int puntiVitaAttuali, int puntiAttacco, int puntiScudo) {
@@ -28,10 +31,6 @@ public abstract class EntitaGenerale {
 
     public int getPuntiAttacco() {
         return puntiAttacco;
-    }
-
-    protected void setPuntiAttacco(int puntiAttacco) {
-        this.puntiAttacco = puntiAttacco;
     }
 
     public int getPuntiScudo() {

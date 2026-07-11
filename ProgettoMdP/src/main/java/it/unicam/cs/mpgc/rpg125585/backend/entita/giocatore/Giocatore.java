@@ -27,9 +27,6 @@ public abstract class Giocatore extends EntitaGenerale{
         this.stanzaCorrente = nuovaStanza;
     }
 
-    /**
-     * Incrementa i punti attacco del giocatore in base al danno dell'arma raccolta.
-     */
     public void aumentaAttaccoDaArma(int bonusDanno) {
         if (bonusDanno > 0) {
             this.puntiAttacco += bonusDanno;
@@ -41,6 +38,8 @@ public abstract class Giocatore extends EntitaGenerale{
             this.inventario.add(artefatto);
         }
     }
+
+    // Difende l'incapsulamento dell'inventario restituendo una vista in sola lettura
 
     public List<Artefatto> getInventario() {
         return Collections.unmodifiableList(this.inventario);
