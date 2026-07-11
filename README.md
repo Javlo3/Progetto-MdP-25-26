@@ -44,4 +44,4 @@ Durante lo sviluppo di questo progetto è stato utilizzato lo strumento di Intel
   * Utilizzato per un confronto teorico sull'efficacia dei pattern di isolamento tra backend e interfaccia grafica, confermando la mia scelta di implementare i Data Transfer Objects (DTO) per evitare il passaggio diretto delle entità di dominio alla GUI.
   * Impiegato come supporto di revisione per verificare la robustezza della logica di serializzazione e deserializzazione polimorfica in JSON, assicurando che la mia ricostruzione del grafo delle stanze non generasse riferimenti circolari.
 
-* Ogni suggerimento concettuale o strutturale fornito dall'AI è stato analizzato, compreso a fondo e modificato manualmente per essere integrato nel contesto dell'applicazione, lasciando la totale paternità logica e del codice allo sviluppatore.
+Ogni suggerimento concettuale o strutturale fornito dall'AI è stato analizzato, compreso a fondo e modificato manualmente per essere integrato nel contesto dell'applicazione, lasciando la totale paternità logica e del codice allo sviluppatore.
