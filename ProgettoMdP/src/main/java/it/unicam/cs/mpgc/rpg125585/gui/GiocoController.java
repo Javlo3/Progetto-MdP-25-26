@@ -31,6 +31,64 @@ public class GiocoController {
     private GestoreCombattimento gestoreCombattimento;
     private StatoGiocoLocale statoLogicoBackend;
 
+    @FXML
+    public void handleStanzaNord() {
+        if (isCombattimentoAttivo()) {
+            gestisciTurnoCombattimento();
+        } else {
+            gestisciSpostamentoEsplorazione("Nord");
+        }
+    }
+
+    @FXML
+    public void handleStanzaSud() {
+        if (isCombattimentoAttivo()) {
+            System.out.println("Non puoi fuggire! Ci sono nemici vivi.");
+        } else {
+            gestisciSpostamentoEsplorazione("Sud");
+        }
+    }
+
+    @FXML
+    public void handleStanzaEst() {
+        if (isCombattimentoAttivo()) {
+            indiceNemicoTarget++;
+            aggiornaGrafica(); // Rinfresca solo la grafica senza salvare inutilmente su file
+        } else {
+            gestisciSpostamentoEsplorazione("Est");
+        }
+    }
+
+    @FXML
+    public void handleStanzaOvest() {
+        if (isCombattimentoAttivo()) {
+            StanzaDTO stanza = trovaStanzaCorrente();
+            if (stanza != null && stanza.getNemiciNellaStanza() != null && !stanza.getNemiciNellaStanza().isEmpty()) {
+                indiceNemicoTarget = (indiceNemicoTarget > 0) ? indiceNemicoTarget - 1 : stanza.getNemiciNellaStanza().size() - 1;
+                aggiornaGrafica();
+            }
+        } else {
+            gestisciSpostamentoEsplorazione("Ovest");
+        }
+    }
+
+    @FXML
+    public void handlePrendiArtefatto() {
+        StanzaDTO stanzaCorrente = trovaStanzaCorrente();
+        if (stanzaCorrente != null && stanzaCorrente.isStanzaLoot()) {
+            StanzaGenerica stanzaRealeGenerica = this.statoLogicoBackend.mappaStanze().get(stanzaCorrente.getIdStanza());
+            if (stanzaRealeGenerica instanceof StanzaLoot stanzaReale) {
+                Artefatto artefatto = stanzaReale.getArtefatto();
+                if (artefatto != null) {
+                    artefatto.applicaEffetto(this.statoLogicoBackend.giocatore());
+                    stanzaReale.rimuoviPrimoArtefatto();
+                    salvaESincronizzaTutto();
+                    aggiornaGrafica();
+                }
+            }
+        }
+    }
+
     public void inizializzaInterfaccia(SalvataggioDTO partita, StatoGiocoLocale statoReale) {
         this.statoPartita = partita;
         this.statoLogicoBackend = statoReale;
@@ -48,14 +106,18 @@ public class GiocoController {
         }
         lblNomeStanza.setText(stanzaCorrente.getNomeStanza());
         lblDescrizioneStanza.setText(stanzaCorrente.getDescrizioneStanza());
-// Gestione area Loot
+        // Gestione area Loot
         if (stanzaCorrente.isStanzaLoot()) {
             mostraAreaLoot();
             riempiAreaLoot(stanzaCorrente);
         } else {
             nascondiAreaLoot();
         }
-// Gestione area Combattimento
+        gestioneStanzaCombattimento(stanzaCorrente);
+
+    }
+
+    private void gestioneStanzaCombattimento(StanzaDTO stanzaCorrente) {
         if (stanzaCorrente.isStanzaCombattimento() && haNemiciVivi(stanzaCorrente)) {
             StanzaCombattimento stanzaCombatReale = (StanzaCombattimento) this.statoLogicoBackend.mappaStanze().get(stanzaCorrente.getIdStanza());
             if (this.gestoreCombattimento == null) {
@@ -105,24 +167,28 @@ public class GiocoController {
         List<ArtefattoDTO> artefatti = stanzaCorrente.getArtefattiNellaStanza();
         if (artefatti != null && !artefatti.isEmpty()) {
             btnPrendiArtefatto.setDisable(false);
-            if (artefatti.size() == 1) {
-                ArtefattoDTO artefatto = artefatti.getFirst();
-                lblNomeArtefatto.setText(artefatto.getNomeArtefatto());
-                lblDescrizioneArtefatto.setText(artefatto.getDescrizioneArtefatto());
-            } else {
-                StringBuilder nomi = new StringBuilder();
-                StringBuilder descrizioni = new StringBuilder();
-                for (int i = 0; i < artefatti.size(); i++) {
-                    nomi.append(artefatti.get(i).getNomeArtefatto()).append(i < artefatti.size() - 1 ? ", " : "");
-                    descrizioni.append("- ").append(artefatti.get(i).getDescrizioneArtefatto()).append(i < artefatti.size() - 1 ? "\n" : "");
-                }
-                lblNomeArtefatto.setText(nomi.toString());
-                lblDescrizioneArtefatto.setText(descrizioni.toString());
-            }
+            gestioneNumeroArtefatti(artefatti);
         } else {
             lblNomeArtefatto.setText("Nessun Artefatto qui");
             lblDescrizioneArtefatto.setText("Hai già saccheggiato questa stanza.");
             btnPrendiArtefatto.setDisable(true);
+        }
+    }
+
+    private void gestioneNumeroArtefatti(List<ArtefattoDTO> artefatti) {
+        if (artefatti.size() == 1) {
+            ArtefattoDTO artefatto = artefatti.getFirst();
+            lblNomeArtefatto.setText(artefatto.getNomeArtefatto());
+            lblDescrizioneArtefatto.setText(artefatto.getDescrizioneArtefatto());
+        } else {
+            StringBuilder nomi = new StringBuilder();
+            StringBuilder descrizioni = new StringBuilder();
+            for (int i = 0; i < artefatti.size(); i++) {
+                nomi.append(artefatti.get(i).getNomeArtefatto()).append(i < artefatti.size() - 1 ? ", " : "");
+                descrizioni.append("- ").append(artefatti.get(i).getDescrizioneArtefatto()).append(i < artefatti.size() - 1 ? "\n" : "");
+            }
+            lblNomeArtefatto.setText(nomi.toString());
+            lblDescrizioneArtefatto.setText(descrizioni.toString());
         }
     }
 
@@ -178,7 +244,8 @@ public class GiocoController {
     private void gestisciTurnoCombattimento() {
         StanzaDTO stanzaCorrente = trovaStanzaCorrente();
         if (stanzaCorrente == null) return;
-        StanzaCombattimento stanzaCombatReale = (StanzaCombattimento) this.statoLogicoBackend.mappaStanze().get(stanzaCorrente.getIdStanza());
+        StanzaCombattimento stanzaCombatReale = (StanzaCombattimento) this.statoLogicoBackend.mappaStanze()
+                .get(stanzaCorrente.getIdStanza());
         if (stanzaCombatReale.getNemiciStanza().isEmpty()) {
             concludiCombattimento();
             return;
@@ -279,61 +346,4 @@ public class GiocoController {
         }
     }
 
-    @FXML
-    public void handleStanzaNord() {
-        if (isCombattimentoAttivo()) {
-            gestisciTurnoCombattimento();
-        } else {
-            gestisciSpostamentoEsplorazione("Nord");
-        }
-    }
-
-    @FXML
-    public void handleStanzaSud() {
-        if (isCombattimentoAttivo()) {
-            System.out.println("Non puoi fuggire! Ci sono nemici vivi.");
-        } else {
-            gestisciSpostamentoEsplorazione("Sud");
-        }
-    }
-
-    @FXML
-    public void handleStanzaEst() {
-        if (isCombattimentoAttivo()) {
-            indiceNemicoTarget++;
-            aggiornaGrafica(); // Rinfresca solo la grafica senza salvare inutilmente su file
-        } else {
-            gestisciSpostamentoEsplorazione("Est");
-        }
-    }
-
-    @FXML
-    public void handleStanzaOvest() {
-        if (isCombattimentoAttivo()) {
-            StanzaDTO stanza = trovaStanzaCorrente();
-            if (stanza != null && stanza.getNemiciNellaStanza() != null && !stanza.getNemiciNellaStanza().isEmpty()) {
-                indiceNemicoTarget = (indiceNemicoTarget > 0) ? indiceNemicoTarget - 1 : stanza.getNemiciNellaStanza().size() - 1;
-                aggiornaGrafica();
-            }
-        } else {
-            gestisciSpostamentoEsplorazione("Ovest");
-        }
-    }
-
-    @FXML
-    public void handlePrendiArtefatto() {
-        StanzaDTO stanzaCorrente = trovaStanzaCorrente();
-        if (stanzaCorrente != null && stanzaCorrente.isStanzaLoot()) {
-            StanzaGenerica stanzaRealeGenerica = this.statoLogicoBackend.mappaStanze().get(stanzaCorrente.getIdStanza());
-            if (stanzaRealeGenerica instanceof StanzaLoot stanzaReale) {
-                Artefatto artefatto = stanzaReale.getArtefatto();
-                if (artefatto != null) {
-                    artefatto.applicaEffetto(this.statoLogicoBackend.giocatore());
-                    stanzaReale.rimuoviPrimoArtefatto();
-                    salvaESincronizzaTutto();
-                    aggiornaGrafica();
-                }
-            }
-        }
-    }
 }
