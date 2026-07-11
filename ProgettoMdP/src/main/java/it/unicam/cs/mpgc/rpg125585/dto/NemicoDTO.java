@@ -14,7 +14,8 @@ public class NemicoDTO {
     public NemicoDTO() {
     }
 
-    public NemicoDTO(String tipoNemico, String nomeNemico, int vitaMassima, int puntiVita, int puntiAttacco, int puntiScudo) {
+    public NemicoDTO(String tipoNemico, String nomeNemico, int vitaMassima, int puntiVita, int puntiAttacco,
+                     int puntiScudo) {
         this.tipoNemico = tipoNemico;
         this.nomeNemico = nomeNemico;
         this.vitaMassima = vitaMassima;
