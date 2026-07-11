@@ -11,7 +11,8 @@ import java.lang.reflect.Type;
 public class ArtefattoDeserializer implements JsonDeserializer<Artefatto> {
 
     @Override
-    public Artefatto deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public Artefatto deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+            throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
         JsonElement tipoElement = jsonObject.get("tipo");
         if (tipoElement == null) {
