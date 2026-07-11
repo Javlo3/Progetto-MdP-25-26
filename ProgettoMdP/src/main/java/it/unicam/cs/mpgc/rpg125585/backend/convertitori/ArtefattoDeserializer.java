@@ -15,9 +15,11 @@ public class ArtefattoDeserializer implements JsonDeserializer<Artefatto> {
             throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
         JsonElement tipoElement = jsonObject.get("tipo");
+
         if (tipoElement == null) {
             throw new JsonParseException("Manca il campo 'tipo' nell'artefatto del JSON!");
         }
+
         String tipo = tipoElement.getAsString().toUpperCase();
         return switch (tipo) {
             case "CURA" -> context.deserialize(json, Cura.class);
