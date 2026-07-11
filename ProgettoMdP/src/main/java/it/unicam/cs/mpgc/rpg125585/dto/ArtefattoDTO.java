@@ -4,6 +4,8 @@ import it.unicam.cs.mpgc.rpg125585.backend.artefatti.Arma;
 import it.unicam.cs.mpgc.rpg125585.backend.artefatti.Artefatto;
 import it.unicam.cs.mpgc.rpg125585.backend.artefatti.Cura;
 
+// Rappresentazione leggera dell'artefatto per il trasferimento dati e la persistenza
+
 public class ArtefattoDTO {
 
     private String tipoArtefatto;
@@ -11,6 +13,8 @@ public class ArtefattoDTO {
     private String descrizioneArtefatto;
     private int puntiCura;
     private int dannoArma;
+
+    // Costruttore per la creazione e la deserializzazione GSON
 
     public ArtefattoDTO() {
     }
@@ -37,6 +41,8 @@ public class ArtefattoDTO {
                     artefatto.getClass());
         }
     }
+
+    // Getter per la gestione dei dati nell'interfaccia grafica
 
     public String getTipoArtefatto() {
         return tipoArtefatto;

@@ -2,6 +2,8 @@ package it.unicam.cs.mpgc.rpg125585.dto;
 
 import it.unicam.cs.mpgc.rpg125585.backend.entita.nemici.Nemico;
 
+// Rappresentazione leggera del nemico per il trasferimento dati e la persistenza
+
 public class NemicoDTO {
 
     private String tipoNemico;
@@ -10,6 +12,8 @@ public class NemicoDTO {
     private int puntiVita;
     private int puntiAttacco;
     private int puntiScudo;
+
+    // Costruttore per la creazione e la deserializzazione GSON
 
     public NemicoDTO() {
     }
@@ -32,6 +36,8 @@ public class NemicoDTO {
         this.puntiAttacco = nemico.getPuntiAttacco();
         this.puntiScudo = nemico.getPuntiScudo();
     }
+
+    // Getter per la gestione dei dati nell'interfaccia grafica
 
     public String getTipoNemico() {
         return tipoNemico;

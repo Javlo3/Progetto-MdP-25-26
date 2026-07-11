@@ -4,6 +4,8 @@ import it.unicam.cs.mpgc.rpg125585.backend.mappa.stanze.*;
 
 import java.util.List;
 
+// Rappresentazione leggera della stanza per il trasferimento dati e la persistenza
+
 public class StanzaDTO {
 
     private int idStanza;
@@ -15,8 +17,9 @@ public class StanzaDTO {
     private boolean isStanzaLoot;
     private boolean isStanzaCombattimento;
 
-    public StanzaDTO() {
-    }
+    // Costruttore per la creazione e la deserializzazione GSON
+
+    public StanzaDTO() {}
 
     public StanzaDTO(int idStanza, String nomeStanza, String descrizioneStanza,List<NemicoDTO> nemiciNellaStanza,
                      List<ArtefattoDTO> artefattiNellaStanza, int idStanzaNord, int idStanzaSud,
@@ -57,12 +60,13 @@ public class StanzaDTO {
                 // Stanza normale/corridoio: non richiede dati aggiuntivi
             }
         }
-
         this.idStanzaNord = (stanza.getStanzaNord() != null ) ? stanza.getStanzaNord().getIdStanza() : -1;
         this.idStanzaSud = (stanza.getStanzaSud() != null ) ? stanza.getStanzaSud().getIdStanza() : -1;
         this.idStanzaEst = (stanza.getStanzaEst() != null ) ? stanza.getStanzaEst().getIdStanza() : -1;
         this.idStanzaOvest = (stanza.getStanzaOvest() != null ) ? stanza.getStanzaOvest().getIdStanza() : -1;
     }
+
+    // Getter per la gestione dei dati nell'interfaccia grafica
 
     public int getIdStanza() {
         return idStanza;

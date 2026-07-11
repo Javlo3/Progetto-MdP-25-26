@@ -2,12 +2,7 @@ package it.unicam.cs.mpgc.rpg125585.dto;
 
 import java.util.List;
 
-/**
- * DTO per il salvataggio completo della partita.
- * Questa classe fa da aggregatore puro per congelare lo stato del gioco:
- * memorizza le statistiche del giocatore, la struttura della mappa e l'ID
- * della stanza in cui si trova il giocatore nel momento del salvataggio.
- */
+// Aggregatore per congelare lo stato del gioco (Giocatore, Mappa e Posizione)
 
 public class SalvataggioDTO {
 
@@ -15,21 +10,19 @@ public class SalvataggioDTO {
     private List<StanzaDTO> mappaStanze;
     private int idStanzaCorrente;
 
-    public SalvataggioDTO() {
-    }
+    // Costruttore vuoto per la deserializzazione GSON
 
-    /**
-     * Costruttore completo che viene utilizzato per il mapping dei dati quando viene creato un nuovo
-     * oggetto di salvataggio da scrivere su file JSON.
-     * @param giocatore Il DTO con le statistiche del giocatore.
-     * @param mappaStanze La lista dei DTO che rappresentano lo stato attuale di tutte le stanze.
-     * @param idStanzaCorrente L'ID numerico della stanza in cui il giocatore si trova.
-     */
+    public SalvataggioDTO() {}
+
+    // Costruttore completo per il mapping del backend verso il file json
+
     public SalvataggioDTO(GiocatoreDTO giocatore, List<StanzaDTO> mappaStanze, int idStanzaCorrente) {
         this.giocatore = giocatore;
         this.mappaStanze = mappaStanze;
         this.idStanzaCorrente = idStanzaCorrente;
     }
+
+    // Getter e Setter per la persistenza dei dati
 
     public GiocatoreDTO getGiocatore() {
         return giocatore;

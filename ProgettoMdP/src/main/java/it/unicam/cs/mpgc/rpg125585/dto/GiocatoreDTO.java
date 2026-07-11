@@ -2,12 +2,8 @@ package it.unicam.cs.mpgc.rpg125585.dto;
 
 import it.unicam.cs.mpgc.rpg125585.backend.entita.giocatore.Giocatore;
 
-/**
- * Data Transfer Object (DTO) per la classe Giocatore.
- * Questa classe è una struttura dati pura utilizzata esclusivamente per la
- * persistenza (salvataggio e caricamento) dei dati tramite Gson, evitando
- * riferimenti circolari e la serializzazione di oggetti complessi come le stanze.
- */
+// Rappresentazione leggera del giocatore per il trasferimento dati e la persistenza
+
 public class GiocatoreDTO {
 
     private String tipoClasse; // Memorizza la classe specifica (es. "Cavaliere", "Arciere", "Mago")
@@ -16,17 +12,12 @@ public class GiocatoreDTO {
     private int puntiAttacco;
     private int puntiScudo;
 
-    /**
-     * Costruttore vuoto/di default richiesto da alcune librerie di serializzazione (come Gson)
-     * per istanziare l'oggetto tramite reflection.
-     */
+
+    // Costruttore per la creazione e la deserializzazione GSON
+
     public GiocatoreDTO() {
     }
 
-    /**
-     * Costruttore completo utilizzato principalmente in fase di caricamento dal JSON
-     * per mappare esplicitamente tutti i campi primitivi.
-     */
     public GiocatoreDTO(String tipoClasse, int vitaMassima, int puntiVita, int puntiAttacco, int puntiScudo) {
         this.tipoClasse = tipoClasse;
         this.vitaMassima = vitaMassima;
@@ -35,11 +26,6 @@ public class GiocatoreDTO {
         this.puntiScudo = puntiScudo;
     }
 
-    /**
-     * Costruttore di convenienza (Factory/Mapping) utilissimo per il salvataggio.
-     * Prende il giocatore in memoria e ne estrae automaticamente lo stato primitivo.
-     * * @param giocatore L'istanza del giocatore attivo nel gioco.
-     */
     public GiocatoreDTO(Giocatore giocatore) {
         this.tipoClasse = giocatore.getClass().getSimpleName(); // Estrae "Cavaliere", "Arciere", ecc.
         this.vitaMassima = giocatore.getVitaMassima();
@@ -48,7 +34,7 @@ public class GiocatoreDTO {
         this.puntiScudo = giocatore.getPuntiScudo();
     }
 
-    // --- GETTER (Essenziali per rileggere i dati nel GestoreFile in fase di CARICAMENTO) ---
+    // Getter per la gestione dei dati nell'interfaccia grafica
 
     public String getTipoClasse() {
         return tipoClasse;
