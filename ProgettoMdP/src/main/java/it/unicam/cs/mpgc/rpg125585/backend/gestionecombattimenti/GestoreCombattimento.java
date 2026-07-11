@@ -20,10 +20,9 @@ public class GestoreCombattimento {
         selezionaProssimoBersaglioAutomatico();
     }
 
-    /**
-     * Permette alla GUI (tasti cambio bersaglio) di cambiare il nemico attivo.
-     * Il cambio avviene solo se il nemico è presente nella stanza ed è vivo.
-     */
+    // Permette alla GUI (tasti cambio bersaglio) di cambiare il nemico attivo.
+    // Il cambio avviene solo se il nemico è presente nella stanza ed è vivo.
+
     public void cambiaBersaglio(Nemico nuovoNemico) {
         if (nuovoNemico != null && nemiciNellaStanza.contains(nuovoNemico) && nuovoNemico.getPuntiVita() > 0) {
             this.nemicoAgganciato = nuovoNemico;
@@ -41,21 +40,29 @@ public class GestoreCombattimento {
         }
 
         // 1. Il giocatore colpisce il bersaglio agganciato
-        dannoRicevuto(giocatore, nemicoAgganciato);
+        calcolaEApplicaDanno(giocatore, nemicoAgganciato);
 
         // 2. Se il nemico è morto, aggiorniamo il target. Altrimenti, contrattacca!
         if (nemicoAgganciato.getPuntiVita() <= 0) {
             selezionaProssimoBersaglioAutomatico();
         } else {
             // Solo il nemico agganciato risponde al fuoco
-            dannoRicevuto(nemicoAgganciato, giocatore);
+            calcolaEApplicaDanno(nemicoAgganciato, giocatore);
         }
 
         return true;
     }
 
-    //Lo scudo non scende mai, protegge sempre l'entità che lo equipaggia senza mai rompersi
-    public void dannoRicevuto(EntitaGenerale attaccante, EntitaGenerale bersaglio) {
+    /**
+     * Calcola il danno inflitto dall'attaccante al bersaglio, sottraendo i punti
+     * scudo di quest'ultimo. Lo scudo mitiga il danno in modo fisso e non si consuma.
+     * Se il danno supera lo scudo, i punti vita del bersaglio vengono decrementati.
+     *
+     * @param attaccante L'entità che sferra l'attacco.
+     * @param bersaglio L'entità che subisce l'attacco.
+     */
+
+    public void calcolaEApplicaDanno(EntitaGenerale attaccante, EntitaGenerale bersaglio) {
         int dannoRealeRicevuto = attaccante.getPuntiAttacco() - bersaglio.getPuntiScudo();
         if (dannoRealeRicevuto > 0){
             int dannoFinale = bersaglio.getPuntiVita() - dannoRealeRicevuto;
@@ -84,18 +91,5 @@ public class GestoreCombattimento {
      */
     public boolean ciSonoNemiciVivi() {
         return this.nemicoAgganciato != null;
-    }
-
-    public boolean giocatoreMorto() {
-        return this.giocatore.getPuntiVita() <= 0;
-    }
-
-    // Getter utili per la GUI per sapere chi evidenziare a schermo e la lista totale
-    public Nemico getNemicoAgganciato() {
-        return nemicoAgganciato;
-    }
-
-    public List<Nemico> getNemiciNellaStanza() {
-        return nemiciNellaStanza;
     }
 }
