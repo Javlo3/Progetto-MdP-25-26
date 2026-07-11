@@ -14,6 +14,8 @@ public class StanzaLoot extends StanzaGenerica {
         this.artefattiStanza = new ArrayList<>();
     }
 
+    // Ritorna una vista non modificabile per proteggere l'incapsulamento della lista
+
     public List<Artefatto> getArtefattiStanza() {
         return Collections.unmodifiableList(artefattiStanza);
     }
