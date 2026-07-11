@@ -45,10 +45,6 @@ public abstract class Giocatore extends EntitaGenerale{
         return Collections.unmodifiableList(this.inventario);
     }
 
-    public int getPuntiAttaccoBase() {
-        return this.puntiAttaccoBase;
-    }
-
     public void resetPuntiAttaccoBase() {
         this.puntiAttacco = this.puntiAttaccoBase;
     }
