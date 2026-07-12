@@ -29,8 +29,7 @@ public class GestoreFile {
     public List<StanzaDTO> caricaMappaBase(String nomeFileNelleRisorse) {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(nomeFileNelleRisorse)) {
             if (is == null) {
-                System.err.println("Il file non è stato trovato tra le risorse: " + nomeFileNelleRisorse);
-                return null;
+                throw new RuntimeException("File non trovato per il nome fornito: " + nomeFileNelleRisorse);
             }
             try (InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
                 Type tipoLista = new TypeToken<List<StanzaDTO>>() {}.getType();
