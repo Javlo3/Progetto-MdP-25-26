@@ -1,4 +1,4 @@
-# 📌 RPG Text-Based Game - Progetto Mdp
+# 📌 RPG JavaFX Game - Progetto Mdp
 
 Questo progetto consiste nello sviluppo di un gioco di ruolo (GDR) testuale e grafico in Java, in cui il giocatore può esplorare un mondo composto da stanze collegate tra loro, affrontare nemici in combattimenti strategici e gestire lo stato della partita. L'applicazione sfrutta un'architettura robusta basata sui principi SOLID e include un sistema completo di persistenza dei dati.
 
